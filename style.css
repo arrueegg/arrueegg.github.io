@@ -1,0 +1,48 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #222;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-pic {
+  width: 140px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.1em;
+  color: #555;
+}
+
+.links a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+h2 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  margin-top: 40px;
+}
+
+.item {
+  margin-bottom: 20px;
+}
+
+.meta {
+  font-size: 0.9em;
+  color: #666;
+}
