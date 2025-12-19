@@ -10,7 +10,7 @@
 <div class="container">
 
   <header>
-    <img src="assets/profile.jpg" alt="Arno Rüegg" class="profile-pic">
+    <img src="assets/Arno_Portrait.png" alt="Arno Rüegg" class="profile-pic">
     <h1>Arno Rüegg</h1>
     <p class="subtitle">
       PhD Researcher in Space Geodesy · Machine Learning for Geospatial Data
@@ -20,7 +20,7 @@
       <a href="mailto:arno.rueegg@gmail.com">Email</a> ·
       <a href="https://github.com/arrueegg">GitHub</a> ·
       <a href="https://www.linkedin.com/in/arnorueegg">LinkedIn</a> ·
-      <a href="assets/cv.pdf">CV (PDF)</a>
+      <a href="assets/CV Arno englisch.pdf">CV (PDF)</a>
     </p>
   </header>
 
@@ -43,23 +43,15 @@
     <h2>Research & Projects</h2>
 
     <div class="item">
-      <h3>Fusion of GNSS and VLBI Data for Global Ionospheric Mapping</h3>
+      <h3>Ionospheric Slant TEC Modeling Based on GNSS Data with Machine Learning</h3>
       <p>
-        Data fusion framework combining sparse VLBI observations with dense
-        GNSS-based ionospheric models using machine learning and robust
-        parameter estimation.
-      </p>
-      <p class="meta">
-        IAG 2025 (under review) · AGU Space Weather 2025
-      </p>
-    </div>
-
-    <div class="item">
-      <h3>Ionospheric Slant TEC Modeling with Machine Learning</h3>
-      <p>
-        Development of ML-based models for global STEC/VTEC estimation from
-        large-scale GNSS data, leveraging HPC clusters and efficient data
-        pipelines.
+        Development of a data-driven model for slant total electron content (STEC)
+        estimation directly from GNSS observations, bypassing single-layer
+        ionospheric assumptions and mapping functions. The approach leverages
+        deep learning to model spatiotemporal ionospheric variability and internally
+        estimates electron density profiles along signal paths. Models are pre-trained
+        on historical data and fine-tuned daily to adapt to real-time conditions,
+        achieving significant RMSE reductions compared to standard GIM-based corrections.
       </p>
       <p class="meta">
         Work in progress
@@ -67,12 +59,68 @@
     </div>
 
     <div class="item">
-      <h3>Master Thesis: Deep Feature Embedding of Sentinel-1 & Sentinel-2</h3>
+      <h3>Fusion of GNSS and VLBI Data for Global Ionospheric Mapping</h3>
       <p>
-        Joint deep learning framework for building detection using SAR and
-        optical satellite imagery.
+        Machine learning–based data fusion framework combining dense GNSS-derived
+        VTEC with sparse but complementary VLBI observations. Two fusion strategies
+        are investigated: direct assimilation of station-based VLBI VTEC and
+        end-to-end integration of VLBI differential TEC (DTEC). A weighted loss
+        balances heterogeneous data volumes, with evaluation against independent
+        Jason-3 altimetry measurements over a full year.
+      </p>
+      <p class="meta">
+        IAG – Geodesy for a Changing Environment 2025 (under review)
       </p>
     </div>
+
+    <div class="item">
+      <h3>A Comparative Study of VTEC Estimates Derived from S/X VLBI and VGOS Observations</h3>
+      <p>
+        Comparative analysis of vertical total electron content (VTEC) estimates
+        derived from colocated S/X VLBI and VGOS observations during simultaneous
+        sessions. Results show good agreement with Global Ionosphere Maps (GIM)
+        and reveal improved stability and reduced sensitivity to solar activity
+        for VGOS, highlighting its potential for enhanced ionospheric monitoring
+        during disturbed space weather conditions.
+      </p>
+      <p class="meta">
+        AGU Space Weather (2025)
+      </p>
+    </div>
+
+    <div class="item">
+      <h3>Master Thesis: A Shared Deep Feature Embedding of Sentinel-1 and Sentinel-2 for Building Detection</h3>
+      <p>
+        Joint deep learning framework for building segmentation using SAR (Sentinel-1)
+        and optical (Sentinel-2) imagery. The work explores domain consistency through
+        adversarial learning and input augmentation, enabling improved single-domain
+        inference while leveraging multi-sensor information during training.
+      </p>
+    </div>
+
+    <div class="item">
+      <h3>Master Project: Vegetation Mapping with ICESat-2</h3>
+      <p>
+        Evaluation and bias correction of a global canopy height map using ICESat-2
+        laser altimetry data across multiple test regions. Systematic over- and
+        underestimation effects were analyzed and mitigated using tile-wise mean
+        corrections and spatial smoothing, achieving improved global RMSE.
+      </p>
+    </div>
+
+    <div class="item">
+      <h3>Bachelor Thesis: Differentiation of Solid and Loose Rock on Orthophotos with Deep Learning</h3>
+      <p>
+        Semantic classification of solid rock and loose material in aerial imagery
+        using a U-Net architecture with a ResNet encoder. The study supports
+        permafrost mapping applications and demonstrates robust performance through
+        cross-validation and extensive data augmentation.
+      </p>
+    </div>
+
+  </section>
+
+
   </section>
 
   <section>
