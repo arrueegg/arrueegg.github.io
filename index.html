@@ -54,84 +54,154 @@
   <section>
     <h2>Research & Projects</h2>
 
-    <div class="item">
-      <h3>Ionospheric Slant TEC Modeling Based on GNSS Data with Machine Learning</h3>
-      <p>
-        Development of a data-driven model for slant total electron content (STEC)
-        estimation directly from GNSS observations, bypassing single-layer
-        ionospheric assumptions and mapping functions. The approach leverages
-        deep learning to model spatiotemporal ionospheric variability and provides realistic 
-        uncertainty estimates along with the STEC. Models are pre-trained
-        on historical data and fine-tuned daily on respective observations to 
-        have a highly accurate products achieving significant RMSE reductions
-        compared to standard GIM-based corrections utilizing mapping functions.
-      </p>
-      <p class="meta">
-        Work in progress
-      </p>
+    <!-- 1) STEC ML (ETH Research Collection conference item) -->
+    <div class="item project">
+      <img class="project-img" src="assets/projects/stec-ml.png" alt="STEC ML project image">
+
+      <div class="project-body">
+        <h3>Ionospheric Slant TEC Modeling Based on GNSS Data with Machine Learning</h3>
+        <p>
+          Development of a data-driven model for slant total electron content (STEC)
+          estimation directly from GNSS observations, bypassing single-layer assumptions
+          and mapping functions. The approach leverages deep learning to model spatiotemporal
+          ionospheric variability and provides uncertainty estimates alongside the STEC.
+          Models are pre-trained on historical data and fine-tuned daily to achieve improved
+          accuracy compared to standard GIM-based corrections.
+        </p>
+
+        <p class="meta">
+          Work in progress · Conference material (open access)
+        </p>
+
+        <p class="links">
+          <strong>Links:</strong>
+          <a href="https://www.research-collection.ethz.ch/items/fd66a53c-14c3-442d-bf1c-f210dee8fce4" target="_blank" rel="noopener">ETH Research Collection</a>
+          ·
+          <a href="https://www.research-collection.ethz.ch/bitstreams/ab13c3c8-08e6-4173-b4b8-6806fc6a5778/download" target="_blank" rel="noopener">Slides (PDF)</a>
+        </p>
+      </div>
     </div>
 
-    <div class="item">
-      <h3>Fusion of GNSS and VLBI Data for Global Ionospheric Mapping</h3>
-      <p>
-        Machine learning–based data fusion framework combining dense GNSS-derived
-        VTEC with sparse but complementary VLBI observations. Two fusion strategies
-        are investigated: direct assimilation of station-based VLBI VTEC and
-        end-to-end integration of VLBI differential TEC (DTEC). A weighted loss
-        balances heterogeneous data volumes, with evaluation against independent
-        Jason-3 altimetry measurements over a full year.
-      </p>
-      <p class="meta">
-        IAG – Geodesy for a Changing Environment 2025 (under review)
-      </p>
+    <!-- 2) GNSS + VLBI fusion poster (ETH Research Collection) -->
+    <div class="item project">
+      <img class="project-img" src="assets/projects/gnss-vlbi-fusion.png" alt="GNSS + VLBI fusion project image">
+
+      <div class="project-body">
+        <h3>Fusion of GNSS and VLBI Data for Global Ionospheric Mapping</h3>
+        <p>
+          Machine learning–based data fusion framework combining dense GNSS-derived VTEC
+          with sparse but complementary VLBI observations. Two fusion strategies are investigated:
+          direct assimilation of station-based VLBI VTEC and end-to-end integration of VLBI
+          differential TEC (DTEC). A weighted loss balances heterogeneous data volumes, with
+          evaluation against independent Jason-3 altimetry measurements over a full year.
+        </p>
+
+        <p class="meta">
+          IAG – Geodesy for a Changing Environment 2025 (under review) · Poster (open access)
+        </p>
+
+        <p class="links">
+          <strong>Links:</strong>
+          <a href="https://www.research-collection.ethz.ch/items/d5a5c997-e28a-420c-9fb8-cab3826841e0" target="_blank" rel="noopener">ETH Research Collection</a>
+          ·
+          <a href="https://www.research-collection.ethz.ch/bitstreams/2b814f06-1d6e-4784-b6b7-cb33d2eb5f26/download" target="_blank" rel="noopener">Poster (PDF)</a>
+        </p>
+      </div>
     </div>
 
-    <div class="item">
-      <h3>A Comparative Study of VTEC Estimates Derived from S/X VLBI and VGOS Observations</h3>
-      <p>
-        Comparative analysis of vertical total electron content (VTEC) estimates
-        derived from colocated S/X VLBI and VGOS observations during simultaneous
-        sessions. Results show good agreement with Global Ionosphere Maps (GIM)
-        and reveal improved stability and reduced sensitivity to solar activity
-        for VGOS, highlighting its potential for enhanced ionospheric monitoring
-        during disturbed space weather conditions.
-      </p>
-      <p class="meta">
-        AGU Space Weather (2025)
-      </p>
+    <!-- 3) Comparative VLBI / VGOS (preprint DOI + dataset DOI + repo) -->
+    <div class="item project">
+      <img class="project-img" src="assets/projects/vlbi-vgos-vtec.png" alt="VLBI vs VGOS VTEC project image">
+
+      <div class="project-body">
+        <h3>A Comparative Study of VTEC Estimates Derived from S/X VLBI and VGOS Observations</h3>
+        <p>
+          Comparative analysis of vertical total electron content (VTEC) estimates derived from
+          colocated S/X VLBI and VGOS observations during simultaneous sessions. Results show
+          good agreement with GNSS-based Global Ionosphere Maps (GIM) and indicate improved
+          stability for VGOS under increased solar activity, highlighting its potential for more robust
+          ionospheric monitoring during disturbed conditions.
+        </p>
+
+        <p class="meta">
+          Space Weather (manuscript / preprint available) · Code + data available
+        </p>
+
+        <p class="links">
+          <strong>Links:</strong>
+          <a href="https://doi.org/10.22541/essoar.174802866.69330893/v1" target="_blank" rel="noopener">Preprint DOI</a>
+          ·
+          <a href="https://doi.org/10.3929/ethz-b-000700325" target="_blank" rel="noopener">Dataset DOI (ETHZ)</a>
+          ·
+          <a href="https://www.gitlab.ethz.ch/spacegeodesy_public/vlbiono" target="_blank" rel="noopener">Repo: VLBIono (GitLab)</a>
+          ·
+          <a href="https://www.research-collection.ethz.ch/items/6f2aecb7-8cc6-48de-bf5c-b17a2df43220" target="_blank" rel="noopener">Related RC contribution</a>
+        </p>
+      </div>
     </div>
 
-    <div class="item">
-      <h3>Master Thesis: A Shared Deep Feature Embedding of Sentinel-1 and Sentinel-2 for Building Detection</h3>
-      <p>
-        Joint deep learning framework for building segmentation using SAR (Sentinel-1)
-        and optical (Sentinel-2) imagery. The work explores domain consistency through
-        adversarial learning and input augmentation, enabling improved single-domain
-        inference while leveraging multi-sensor information during training.
-      </p>
+    <!-- 4) MSc thesis (ETH PDF page) -->
+    <div class="item project">
+      <img class="project-img" src="assets/projects/s1-s2-embedding.png" alt="Sentinel-1/2 embedding project image">
+
+      <div class="project-body">
+        <h3>Master Thesis: A Shared Deep Feature Embedding of Sentinel-1 and Sentinel-2 for Building Detection</h3>
+        <p>
+          Joint deep learning framework for building segmentation using SAR (Sentinel-1) and optical
+          (Sentinel-2) imagery. The work explores domain consistency through adversarial learning and
+          input augmentation, enabling improved single-domain inference while leveraging multi-sensor
+          information during training.
+        </p>
+
+        <p class="links">
+          <strong>Links:</strong>
+          <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/R%C3%BCegg_Arno_MSc_2023.pdf" target="_blank" rel="noopener">Thesis (PDF)</a>
+          ·
+          <a href="https://prs.igp.ethz.ch/education/completed-student-msc-bsc-theses.html" target="_blank" rel="noopener">IGP list entry</a>
+        </p>
+      </div>
     </div>
 
-    <div class="item">
-      <h3>Master Project: Vegetation Mapping with ICESat-2</h3>
-      <p>
-        Evaluation and bias correction of a global canopy height map using ICESat-2
-        laser altimetry data across multiple test regions. Systematic over- and
-        underestimation effects were analyzed and mitigated using tile-wise mean
-        corrections and spatial smoothing, achieving improved global RMSE.
-      </p>
+    <!-- 5) ICESat-2 project (ETH PDF) -->
+    <div class="item project">
+      <img class="project-img" src="assets/projects/icesat2-canopy.png" alt="ICESat-2 vegetation mapping project image">
+
+      <div class="project-body">
+        <h3>Master Project: Vegetation Mapping with ICESat-2</h3>
+        <p>
+          Evaluation and bias correction of a global canopy height map using ICESat-2 laser altimetry
+          data across multiple test regions. Systematic over- and underestimation effects were analyzed
+          and mitigated using tile-wise mean corrections and spatial smoothing.
+        </p>
+
+        <p class="links">
+          <strong>Links:</strong>
+          <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/IPA_ArnoR%C3%BCegg.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+        </p>
+      </div>
     </div>
 
-    <div class="item">
-      <h3>Bachelor Thesis: Differentiation of Solid and Loose Rock on Orthophotos with Deep Learning</h3>
-      <p>
-        Semantic classification of solid rock and loose material in aerial imagery
-        using a U-Net architecture with a ResNet encoder. The study supports
-        permafrost mapping applications and demonstrates robust performance through
-        cross-validation and extensive data augmentation.
-      </p>
+    <!-- 6) BSc thesis (ETH PDF) -->
+    <div class="item project">
+      <img class="project-img" src="assets/projects/rock-segmentation.png" alt="Rock classification project image">
+
+      <div class="project-body">
+        <h3>Bachelor Thesis: Classification of Solid and Loose Rock on Orthophotos with Deep Learning</h3>
+        <p>
+          Deep learning–based classification of solid rock and loose material in aerial imagery for
+          permafrost-related mapping applications. Implemented with a U-Net architecture and transfer
+          learning, evaluated via cross-validation and data augmentation.
+        </p>
+
+        <p class="links">
+          <strong>Links:</strong>
+          <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/R%C3%BCegg_Arno_BSc_2021.pdf" target="_blank" rel="noopener">Thesis (PDF)</a>
+        </p>
+      </div>
     </div>
 
   </section>
+
 
 
   </section>
