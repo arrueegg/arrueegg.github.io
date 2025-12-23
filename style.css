@@ -2,6 +2,15 @@
    Base
    ========================= */
 
+:root{
+  --container-w: 860px;
+  --nav-offset: 86px; /* used for scroll offset; adjust if you change nav padding */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background: #ffffff;
@@ -11,14 +20,14 @@ body {
 }
 
 .container {
-  max-width: 800px;
-  margin: 50px auto;
+  max-width: var(--container-w);
+  margin: 44px auto;
   padding: 0 20px;
 }
 
 header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
 }
 
 .profile-pic {
@@ -29,6 +38,8 @@ header {
 
 h1 {
   margin: 0 0 6px 0;
+  font-size: 2.2rem;
+  letter-spacing: -0.02em;
 }
 
 .subtitle {
@@ -46,6 +57,13 @@ h2 {
   padding-bottom: 5px;
   margin-top: 40px;
   margin-bottom: 16px;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+}
+
+/* Fix anchor overlap under sticky nav */
+section {
+  scroll-margin-top: var(--nav-offset);
 }
 
 .item {
@@ -77,61 +95,125 @@ h2 {
 }
 
 /* =========================
-   Project layout with images
-   (use: <div class="item project"> ... )
+   Navigation (sticky, full width)
+   ========================= */
+
+.nav-wrapper {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #eee;
+
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid #eee;
+  border-radius: 999px;
+  background: #fafafa;
+}
+
+.nav a {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95em;
+  line-height: 1;
+}
+
+.nav a:hover {
+  background: #ffffff;
+  border: 1px solid #e9e9e9;
+}
+
+/* =========================
+   Project cards (grid + no-crop images)
    ========================= */
 
 .project {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 18px;
+  align-items: start;
+
+  background: #fafafa;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  margin-bottom: 22px;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.project:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+}
+
+/* No cropping: contain + consistent frame */
 .project-img {
-  width: 300px;
-  height: auto;
-  max-width: 100%;
-  object-fit: cover;
-  border-radius: 1px;
-  background: #f2f2f2;
-  border: 1px solid #eee;
-  flex-shrink: 0;
+  width: 100%;
+  height: auto;      
+  object-fit: contain; 
+  display: block;
+  object-position: center;
+  padding: 10px;       
+  background: #ffffff;
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
-
 
 .project-body {
-  flex: 1;
   min-width: 0;
 }
 
-
 .project-body h3 {
-  margin: 0 0 6px 0;
+  margin: 0 0 8px 0;
+  line-height: 1.25;
 }
 
-/* If you keep <p class="links"> inside projects, this keeps it tidy */
+/* Optional: nicer link chips inside cards */
 .project .links {
   font-size: 0.9em;
-  margin-top: 6px;
+  margin-top: 10px;
+}
+
+.project .links strong {
+  margin-right: 6px;
+}
+
+.project .links a {
+  display: inline-block;
+  padding: 7px 10px;
+  margin: 6px 6px 0 0;
+  border: 1px solid #e6e6e6;
+  border-radius: 999px;
+  background: #fff;
+  text-decoration: none;
+  font-size: 0.9em;
+  color: #0066cc;
+}
+
+.project .links a:hover {
+  border-color: #dcdcdc;
+  text-decoration: none;
 }
 
 /* =========================
-   Publications (optional)
-   ========================= */
-
-.publist {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.publist li {
-  margin-bottom: 12px;
-}
-
-/* =========================
-   Footer (optional)
+   Footer
    ========================= */
 
 footer {
@@ -147,15 +229,22 @@ footer {
    Responsive
    ========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .project {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .project-img {
-    width: 100%;
-    max-width: 100%;
-    height: 180px;
+    height: 200px;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  :root{
+    --nav-offset: 110px; /* slightly bigger on mobile due to wrapping */
   }
 }
-

@@ -18,7 +18,7 @@
   <link rel="icon" href="/assets/favicon.png" type="image/png">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/assets/favicon.png">
-  
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -26,10 +26,7 @@
     "name": "Arno Rüegg",
     "url": "https://www.arnorueegg.ch",
     "jobTitle": "PhD Researcher in Space Geodesy",
-    "affiliation": {
-      "@type": "Organization",
-      "name": "ETH Zürich"
-    },
+    "affiliation": { "@type": "Organization", "name": "ETH Zürich" },
     "sameAs": [
       "https://github.com/arrueegg",
       "https://www.linkedin.com/in/arnorueegg"
@@ -49,13 +46,10 @@
 <body>
 
 <div class="container">
-
   <header>
     <img src="assets/Arno_Portrait.png" alt="Arno Rüegg" class="profile-pic">
     <h1>Arno Rüegg</h1>
-    <p class="subtitle">
-      PhD Researcher in Space Geodesy · Machine Learning for Geospatial Data
-    </p>
+    <p class="subtitle">PhD Researcher in Space Geodesy · Machine Learning for Geospatial Data</p>
 
     <p class="links">
       <a href="mailto:arno.rueegg@gmail.com">Email</a> ·
@@ -64,8 +58,21 @@
       <a href="assets/CV_Arno.pdf">CV (PDF)</a>
     </p>
   </header>
+</div>
 
-  <section>
+<!-- Sticky nav is OUTSIDE the container so it can be truly full-width and sticky -->
+<div class="nav-wrapper">
+  <nav class="nav" aria-label="Page navigation">
+    <a href="#about">About</a>
+    <a href="#interests">Interests</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#teaching">Teaching</a>
+  </nav>
+</div>
+
+<div class="container">
+  <section id="about">
     <h2>About</h2>
     <p>
       I am a PhD researcher in geomatics at ETH Zürich, specializing in machine
@@ -80,25 +87,22 @@
     </p>
   </section>
 
-  <section>
+  <section id="interests">
     <h2>Research Interests</h2>
     <ul>
       <li>Ionospheric modeling</li>
-      <li>GNSS & VLBI data fusion</li>
+      <li>GNSS &amp; VLBI data fusion</li>
       <li>Machine learning for geophysics</li>
       <li>Uncertainty-aware models</li>
-      <li>Large-scale ML & HPC</li>
+      <li>Large-scale ML &amp; HPC</li>
     </ul>
   </section>
 
+  <section id="projects">
+    <h2>Research &amp; Projects</h2>
 
-  <section>
-    <h2>Research & Projects</h2>
-
-    <!-- 1) STEC ML (ETH Research Collection conference item) -->
     <div class="item project">
       <img class="project-img" src="assets/projects/STEC.png" alt="STEC ML project image">
-
       <div class="project-body">
         <h3>Ionospheric Slant TEC Modeling Based on GNSS Data with Machine Learning</h3>
         <p>
@@ -109,11 +113,7 @@
           Models are pre-trained on historical data and fine-tuned daily to achieve improved
           accuracy compared to standard GIM-based corrections.
         </p>
-
-        <p class="meta">
-          Work in progress · Conference material (open access)
-        </p>
-
+        <p class="meta">Work in progress · Conference material (open access)</p>
         <p class="links">
           <strong>Links:</strong>
           <a href="https://www.research-collection.ethz.ch/bitstreams/ab13c3c8-08e6-4173-b4b8-6806fc6a5778/download" target="_blank" rel="noopener">Slides (PDF)</a>
@@ -121,10 +121,8 @@
       </div>
     </div>
 
-    <!-- 2) GNSS + VLBI fusion poster (ETH Research Collection) -->
     <div class="item project">
       <img class="project-img" src="assets/projects/Fusion.png" alt="GNSS + VLBI fusion project image">
-
       <div class="project-body">
         <h3>Fusion of GNSS and VLBI Data for Global Ionospheric Mapping</h3>
         <p>
@@ -134,11 +132,7 @@
           differential TEC (DTEC). A weighted loss balances heterogeneous data volumes, with
           evaluation against independent Jason-3 altimetry measurements over a full year.
         </p>
-
-        <p class="meta">
-          IAG – Geodesy for a Changing Environment 2025 (under review) · Poster (open access)
-        </p>
-
+        <p class="meta">IAG – Geodesy for a Changing Environment 2025 (under review) · Poster (open access)</p>
         <p class="links">
           <strong>Links:</strong>
           <a href="https://www.research-collection.ethz.ch/bitstreams/2b814f06-1d6e-4784-b6b7-cb33d2eb5f26/download" target="_blank" rel="noopener">Poster (PDF)</a>
@@ -146,10 +140,8 @@
       </div>
     </div>
 
-    <!-- 3) Comparative VLBI / VGOS (preprint DOI + dataset DOI + repo) -->
     <div class="item project">
       <img class="project-img" src="assets/projects/Comparative_Analysis.png" alt="VLBI and VGOS VTEC vs GIM image">
-
       <div class="project-body">
         <h3>A Comparative Study of VTEC Estimates Derived from S/X VLBI and VGOS Observations</h3>
         <p>
@@ -159,26 +151,18 @@
           stability for VGOS under increased solar activity, highlighting its potential for more robust
           ionospheric monitoring during disturbed conditions.
         </p>
-
-        <p class="meta">
-          Space Weather (manuscript) · Code + data available
-        </p>
-
+        <p class="meta">Space Weather (manuscript) · Code + data available</p>
         <p class="links">
           <strong>Links:</strong>
           <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025SW004540" target="_blank" rel="noopener">AGU Space Weather</a>
-          ·
           <a href="https://doi.org/10.3929/ethz-b-000700325" target="_blank" rel="noopener">Dataset</a>
-          ·
           <a href="https://www.gitlab.ethz.ch/spacegeodesy_public/vlbiono" target="_blank" rel="noopener">VLBIono (GitLab)</a>
         </p>
       </div>
     </div>
 
-    <!-- 4) MSc thesis (ETH PDF page) -->
     <div class="item project">
       <img class="project-img" src="assets/projects/Masterthesis.png" alt="Sentinel-1/2 embedding project image">
-
       <div class="project-body">
         <h3>Master Thesis: A Shared Deep Feature Embedding of Sentinel-1 and Sentinel-2 for Building Detection</h3>
         <p>
@@ -187,7 +171,6 @@
           input augmentation, enabling improved single-domain inference while leveraging multi-sensor
           information during training.
         </p>
-
         <p class="links">
           <strong>Links:</strong>
           <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/R%C3%BCegg_Arno_MSc_2023.pdf" target="_blank" rel="noopener">Thesis (PDF)</a>
@@ -195,10 +178,8 @@
       </div>
     </div>
 
-    <!-- 5) ICESat-2 project (ETH PDF) -->
     <div class="item project">
       <img class="project-img" src="assets/projects/IPA.png" alt="ICESat-2 vegetation mapping project image">
-
       <div class="project-body">
         <h3>Master Project: Vegetation Mapping with ICESat-2</h3>
         <p>
@@ -206,7 +187,6 @@
           data across multiple test regions. Systematic over- and underestimation effects were analyzed
           and mitigated using tile-wise mean corrections and spatial smoothing.
         </p>
-
         <p class="links">
           <strong>Links:</strong>
           <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/IPA_ArnoR%C3%BCegg.pdf" target="_blank" rel="noopener">Report (PDF)</a>
@@ -214,10 +194,8 @@
       </div>
     </div>
 
-    <!-- 6) BSc thesis (ETH PDF) -->
     <div class="item project">
       <img class="project-img" src="assets/projects/Bachelorthesis.png" alt="Rock classification project image">
-
       <div class="project-body">
         <h3>Bachelor Thesis: Classification of Solid and Loose Rock on Orthophotos with Deep Learning</h3>
         <p>
@@ -225,7 +203,6 @@
           permafrost-related mapping applications. Implemented with a U-Net architecture and transfer
           learning, evaluated via cross-validation and data augmentation.
         </p>
-
         <p class="links">
           <strong>Links:</strong>
           <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/R%C3%BCegg_Arno_BSc_2021.pdf" target="_blank" rel="noopener">Thesis (PDF)</a>
@@ -235,7 +212,7 @@
 
   </section>
 
-  <section>
+  <section id="education">
     <h2>Education</h2>
     <ul>
       <li><strong>PhD Space Geodesy</strong>, ETH Zürich (2023–now)</li>
@@ -244,21 +221,18 @@
     </ul>
   </section>
 
-  <section>
+  <section id="teaching">
     <h2>Teaching</h2>
     <ul>
       <li>Assistant, Linear Algebra (ETH Zürich, 2022)</li>
       <li>Assistant, Geodetic Measurement Techniques (ETH Zürich, 2023–2024)</li>
-      <li>Assistant, Geodetic Data Analysis (ETH Zürich, 2023-now)</li>
+      <li>Assistant, Geodetic Data Analysis (ETH Zürich, 2023–now)</li>
     </ul>
   </section>
-
 </div>
 
 <footer>
-  <p>
-    © 2025 Arno Rüegg · Last updated: December 2025
-  </p>
+  <p>© 2025 Arno Rüegg · Last updated: December 2025</p>
 </footer>
 
 </body>
