@@ -5,7 +5,7 @@
 :root{
   --container-w: 860px;
   --nav-offset: 86px;
-  --accent-rgb: 0, 102, 204;
+  --accent-rgb: 0, 0, 0;
 }
 
 html { scroll-behavior: smooth; }
@@ -40,22 +40,31 @@ header {
   height: 500px;          /* extends farther down */
   z-index: 0;
 
+
+
   /* Layer stack:
      1) soft vertical accent wash
      2) multiple soft spotlights for depth
      3) subtle dot grid
      4) crossing diagonal line structures
   */
-  background:
-    /* (1) vertical wash */
+  background: url('assets/background.png');
+
+  background-size: cover;
+  background-position: center;
+
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 75%);
+
+    /* (1) vertical wash - commented out
     linear-gradient(
       to bottom,
       rgba(var(--accent-rgb), 0.25) 0%,
       rgba(var(--accent-rgb), 0.15) 28%,
       rgba(255,255,255,0.00) 72%
     ),
+    */
 
-    /* (2) soft spotlights (adds depth) */
+    /* (2) soft spotlights (adds depth) - commented out
     radial-gradient(circle at 22% 18%,
       rgba(var(--accent-rgb), 0.20),
       rgba(255,255,255,0.00) 52%
@@ -76,11 +85,13 @@ header {
       rgba(var(--accent-rgb), 0.12),
       rgba(255,255,255,0.00) 50%
     ),
+    */
 
-    /* (3) dot grid */
+    /* (3) dot grid - commented out
     radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px),
+    */
 
-    /* (4) diagonal “technical” lines */
+    /* (4) diagonal “technical” lines - commented out
     repeating-linear-gradient(
       35deg,
       rgba(0,0,0,0.04) 0px,
@@ -94,35 +105,16 @@ header {
       rgba(0,0,0,0.03) 1px,
       transparent 1px,
       transparent 20px
-    );
+    )
+    */
 
-  background-size:
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    auto,
-    18px 18px,
-    auto,
-    auto;
 
-  background-position:
-    center,
-    center,
-    center,
-    center,
-    center,
-    center,
-    0 0,
-    center,
-    center;
 
   background-repeat: no-repeat;
 }
 
 
-/* Fade to white */
+/* Fade to white - not needed with mask */
 .hero::after {
   content: "";
   position: absolute;
@@ -131,10 +123,10 @@ header {
   /* longer fade: stays present longer, then disappears smoothly */
   background: linear-gradient(
     to bottom,
-    rgba(255,255,255,0.00) 40%,
-    rgba(255,255,255,0.20) 70%,
-    rgba(255,255,255,0.60) 90%,
-    rgba(255,255,255,1.00) 100%
+    rgba(255,255,255,0.00) 20%,
+    rgba(255,255,255,0.30) 50%,
+    rgba(255,255,255,0.70) 80%,
+    rgba(255,255,255,0.00) 100%
   );
 }
 
@@ -164,7 +156,7 @@ header.header > * {
   margin: 0 auto 15px auto;
   display: block;
   background: #fff;
-  border: 4px solid #fff;
+  border: 4px solid #555555;
 }
 
 h1 {
