@@ -1253,7 +1253,7 @@ footer p {
 /* Short screens: a flatter profile, tighter lanes and a smaller about text
    keep each step on one screen */
 @media screen and (max-height: 860px) {
-  .hero { padding-block: 40px 48px; }
+  .hero { padding-block: 28px 36px; }
   .about-lead { font-size: clamp(1.25rem, 1.8vw, 1.45rem); margin-bottom: 14px; }
   .about-text p:not(.about-lead) { font-size: 0.95rem; }
   .about-facts { margin-top: 14px; padding-top: 12px; }
