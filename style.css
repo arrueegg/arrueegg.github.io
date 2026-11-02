@@ -492,11 +492,11 @@ h1 {
 }
 
 .logo {
-  height: 58px;
+  height: 85px;
   width: auto;
 }
 
-.logo-eth { height: 38px; }
+.logo-eth { height: 75px; }
 
 @media (prefers-color-scheme: dark) {
   .logo-eth { filter: invert(1); }
