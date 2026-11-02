@@ -1,257 +1,521 @@
 /* =========================
+   Fonts (self-hosted, latin subset)
+   ========================= */
+
+@font-face {
+  font-family: "Schibsted Grotesk";
+  src: url("assets/fonts/schibsted-grotesk-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("assets/fonts/ibm-plex-mono-400-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("assets/fonts/ibm-plex-mono-500-latin.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("assets/fonts/instrument-serif-italic-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* =========================
+   Tokens
+   The palette borrows from Swiss hiking maps: paper, brown contours,
+   blue hydrography (used for links), black rock lines and the red of the
+   white-red-white mountain trail markers as the accent.
+   ========================= */
+
+:root {
+  --container-w: 1080px;
+  --hero-w: 1180px;
+  --nav-height: 64px;
+  --heading-space: 128px; /* room above each step for the pinned signpost */
+  --signpost-height: 44px;
+
+  --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
+  --paper: #f4f1e8;
+  --surface: #fbfaf5;
+  --ink: #1d1c1a;
+  --ink-soft: #4f4b44;
+  --ink-faint: #6b6559; /* 5:1 on paper, for the small mono labels */
+  --line: #ddd6c6;
+  --grid-line: rgba(31, 106, 165, 0.07);
+  --contour: #a8743f;
+  --water: #1f6aa5;
+  --water-soft: rgba(31, 106, 165, 0.09);
+  --forest: #3d8a4e;
+  --accent: #d3261c;
+  --accent-strong: #a81b13;
+  --accent-soft: rgba(211, 38, 28, 0.1);
+  --on-accent: #ffffff;
+  --shadow: 0 18px 40px -24px rgba(60, 45, 20, 0.35);
+
+  /* How much paper covers the map: at the top of the page and after scrolling */
+  --map-veil-start: 0;
+  --map-veil-end: 0.5;
+
+  /* Swiss hiking signpost colours; identical in light and dark mode */
+  --trail-yellow: #f7a600;
+  --trail-red: #d3261c;
+  --trail-ink: #111111;
+
+  --topo-bg: #f4f1e8;
+  --topo-minor: rgba(168, 116, 63, 0.5);
+  --topo-major: #a8743f;
+  --topo-bold: #1d1c1a;
+  --topo-label: #7d5427;
+  --topo-summit: #d3261c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121418;
+    --surface: #191c21;
+    --ink: #ece8df;
+    --ink-soft: #bdb7aa;
+    --ink-faint: #868074;
+    --line: #2e3138;
+    --grid-line: rgba(111, 179, 232, 0.06);
+    --contour: #d4a46e;
+    --water: #74b6ea;
+    --water-soft: rgba(116, 182, 234, 0.12);
+    --forest: #6cc27c;
+    --accent: #ff5a4e;
+    --accent-strong: #ff7b70;
+    --accent-soft: rgba(255, 90, 78, 0.14);
+    --on-accent: #1a0d0b;
+    --shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.8);
+
+    --topo-bg: #121418;
+    --topo-minor: rgba(212, 164, 110, 0.3);
+    --topo-major: #c08d55;
+    --topo-bold: #ece8df;
+    --topo-label: #e2b886;
+    --topo-summit: #ff5a4e;
+  }
+}
+
+/* =========================
    Base
    ========================= */
 
-:root{
-  --container-w: 860px;
-  --nav-offset: 86px;
-  --accent-rgb: 0, 102, 204;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* Chapter scrolling: the header and every step fill the screen below the
+   navigation bar, and each scroll gesture moves exactly one step. */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--nav-height);
+}
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #ffffff;
-  color: #222;
+  font-family: var(--font-sans);
+  background: var(--paper);
+  color: var(--ink);
   line-height: 1.6;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-.container {
-  max-width: var(--container-w);
-  margin: 44px auto;
-  padding: 0 20px;
-}
+a { color: var(--water); }
 
-header {
-  text-align: center;
-  margin-bottom: 22px;
-  position: relative;
-  padding-top: 60px;
-  z-index: 10;
-}
-
-/* PURE background layer */
-.hero {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 500px;          /* extends farther down */
-  z-index: 0;
-
-
-
-  /* Layer stack:
-     1) soft vertical accent wash
-     2) multiple soft spotlights for depth
-     3) subtle dot grid
-     4) crossing diagonal line structures
-  */
-  background: url('assets/background.webp');
-
-  background-size: cover;
-  background-position: center;
-
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 85%);}
-
-
-/* Fade to white - not needed with mask */
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  /* longer fade: stays present longer, then disappears smoothly */
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.00) 20%,
-    rgba(255,255,255,0.30) 50%,
-    rgba(255,255,255,0.70) 80%,
-    rgba(255,255,255,0.00) 100%
-  );
-}
-
-
-header.header {
-  position: relative;
-  text-align: center;
-  padding-top: 120px;
-  padding-bottom: 20px;
-  margin-bottom: 22px;
-}
-
-/* Put real content above the hero */
-header.header > * {
-  position: relative;
-  z-index: 1;
-}
-
-
-/* =========================
-   Header content
-   ========================= */
-
-.eth-logo {
-  height: 80px;
-  margin-top: 10px;
-  opacity: 1.0;
-}
-.space-logo {
-  height: 80px;
-  margin-top: 10px;
-  opacity: 1.0;
-}
-.profile-pic {
-  width: 140px;
-  height: auto;
-  max-width: 100%;
-  border-radius: 50%;
-  margin: 0 auto 15px auto;
-  display: block;
-  background: #fff;
-  border: 4px solid #555555;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.28);
-}
-
-h1 {
-  margin: 0 0 6px 0;
-  font-size: 2.2rem;
-  letter-spacing: -0.02em;
-}
-
-.subtitle {
-  font-size: 1.1em;
-  color: #555;
-  margin: 0 0 10px 0;
-}
+::selection { background: var(--accent); color: var(--on-accent); }
 
 p { margin: 8px 0; }
 
-h2 {
-  border-bottom: 2px solid rgba(var(--accent-rgb), 0.6);
-  padding-bottom: 8px;
-  margin-top: 50px;
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #333;
+img { max-width: 100%; }
+
+.container {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-section { scroll-margin-top: var(--nav-offset); }
+.chapter { position: relative; }
 
-.interest-tags {
+/* The signpost stays pinned while the chapter's steps scroll underneath it,
+   then slides away under the navigation bar when the chapter ends. */
+.chapter-heading {
+  position: sticky;
+  top: calc(var(--nav-height) + 28px);
+  z-index: 1;
+  height: var(--signpost-height);
+}
+
+.step {
+  min-height: calc(100svh - var(--nav-height));
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.interest-row {
-  display: flex;
   justify-content: center;
-  gap: 10px;
+  padding: var(--heading-space) 0 48px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  view-timeline: --step;
 }
 
-.interest-tags span {
-  border-radius: 999px;
-  padding: 6px 18px;
-  font-size: 0.9em;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  display: inline-block;
-  transition: transform 0.15s ease;
+/* Paper backdrop behind each step's content, fading out on all four sides
+   into the map instead of ending in a hard card edge. */
+.step-content,
+.stage-content {
+  position: relative;
+  z-index: 0;
 }
 
-.interest-tags span:hover { transform: scale(1.06); }
-
-.meta {
-  font-size: 0.85em;
-  color: #777;
-  font-style: italic;
-  margin-top: 6px;
+.step-content::before,
+.stage-content::before {
+  --fade: 48px;
+  content: "";
+  position: absolute;
+  inset: -48px -64px;
+  z-index: -1;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  mask-image:
+    linear-gradient(90deg, transparent, #000 64px, #000 calc(100% - 64px), transparent),
+    linear-gradient(180deg, transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
+  mask-composite: intersect;
+  pointer-events: none;
 }
 
-#education ul,
-#teaching ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#education li,
-#teaching li {
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 0.97em;
-  color: #333;
-}
-
-#education li:last-child,
-#teaching li:last-child {
-  border-bottom: none;
+/* Without room for the side fades they would push the page sideways */
+@media (max-width: 1180px) {
+  .step-content::before,
+  .stage-content::before {
+    left: -16px;
+    right: -16px;
+    mask-image: linear-gradient(180deg, transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
+  }
 }
 
 /* =========================
-   Links
+   Hero
    ========================= */
 
-.links {
-  margin-top: 10px;
-  font-size: 0.88em;
+/* The contour map is fixed behind the whole page; the veil above it fades the
+   map out as the header scrolls away (--map-veil-progress is set by JS). */
+.map-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100lvh;
+  z-index: -2;
 }
 
-.header-links {
+.map-background canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Faint kilometre grid on top of the map, like on national maps */
+.map-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 96px 96px;
+  background-position: center top;
+}
+
+.map-veil {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--paper);
+  opacity: calc(var(--map-veil-start) + (var(--map-veil-end) - var(--map-veil-start)) * var(--map-veil-progress, 0));
+  pointer-events: none;
+}
+
+.hero {
+  position: relative;
+  min-height: calc(100svh - var(--nav-height));
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 72px 20px 88px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.header-links a {
-  color: #0066cc;
-  text-decoration: none;
-  background: rgba(255,255,255,0.75);
-  border: 1px solid #c5d6ee;
-  border-radius: 999px;
-  padding: 5px 14px;
-  font-size: 0.92em;
-  backdrop-filter: blur(4px);
-  transition: background 0.15s ease;
-}
-
-.header-links a:hover {
-  background: #fff;
-  text-decoration: none;
-}
-
-.project-body .links {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
 }
 
-.project-body .links strong {
-  margin-right: 2px;
+/* Paper "clearing" centred on the text column so it stays readable on the
+   map; the column starts at the left edge of the centred hero grid. */
+.hero::before {
+  --text-column-left: max(20px, calc(50% - var(--hero-w) / 2));
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 920px 760px at calc(var(--text-column-left) + 280px) 50%,
+    color-mix(in srgb, var(--paper) 95%, transparent) 0%,
+    color-mix(in srgb, var(--paper) 88%, transparent) 50%,
+    transparent 80%
+  );
+  pointer-events: none;
 }
 
-.project-body .links a {
-  color: #0066cc;
+.hero-grid {
+  position: relative;
+  width: 100%;
+  max-width: var(--hero-w);
+  margin: 0 auto;
+}
+
+.hero-text { max-width: 600px; }
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 22px;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 26px;
+}
+
+.portrait {
+  width: 160px;
+  height: 160px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 1px var(--line), var(--shadow);
+  flex-shrink: 0;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.positioning {
+  font-size: clamp(1.3rem, 2.3vw, 1.65rem);
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin: 0 0 12px;
+  max-width: 30ch;
+}
+
+/* Italic serif in water blue, the way maps label lakes and rivers */
+.positioning em,
+.about-lead em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.12em;
+  color: var(--water);
+  letter-spacing: 0;
+}
+
+.positioning-detail {
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin: 0 0 26px;
+}
+
+/* Availability signpost: a white location plate, the yellow direction sign
+   with the white-red-white mountain-trail tip, and a short pole. On wide
+   screens it stands in the open map to the right of the text. */
+.hero-sign {
+  --tip-width: 44px;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 390px);
+  margin: 0 0 28px;
+  color: var(--trail-ink);
+  filter: drop-shadow(0 0 0.6px rgba(0, 0, 0, 0.55)) drop-shadow(0 16px 20px rgba(0, 0, 0, 0.16));
+}
+
+.hero-sign-caption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4a463f;
+}
+
+.hero-sign-plate {
+  margin: 0 var(--tip-width) 0 0;
+  padding: 12px 18px 10px;
+  background:
+    radial-gradient(circle, #9a958a 1.6px, transparent 2.2px) 7px 50% / 6px 6px no-repeat,
+    radial-gradient(circle, #9a958a 1.6px, transparent 2.2px) calc(100% - 7px) 50% / 6px 6px no-repeat,
+    #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.hero-sign-plate strong {
+  display: block;
+  font-size: clamp(1.9rem, 3vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.hero-sign-arrow {
+  display: grid;
+  grid-template-columns: 1fr var(--tip-width);
+  grid-template-rows: auto 1fr;
+}
+
+.hero-sign-arrow .hero-sign-caption {
+  grid-column: 1;
+  padding: 12px 18px 2px;
+  background: var(--trail-yellow);
+  color: #3b2a00;
+}
+
+.hero-sign-arrow ul {
+  grid-column: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0 18px 14px;
+  background: var(--trail-yellow);
+  font-size: 1.08rem;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.hero-sign-arrow::after {
+  content: "";
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  background: linear-gradient(#ffffff 0 36%, var(--trail-red) 36% 64%, #ffffff 64% 100%);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.hero-sign-pole {
+  align-self: center;
+  margin-right: var(--tip-width);
+  width: 12px;
+  height: 32px;
+  background: linear-gradient(90deg, #8d8a84, #d8d5cf 45%, #77746e);
+}
+
+/* Beside the 600px text column the sign takes whatever room is left */
+@media (min-width: 1000px) {
+  .hero-sign {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: clamp(320px, 100% - 630px, 390px);
+    height: fit-content;
+    margin: auto 0;
+  }
+  .hero-sign-pole { height: 120px; }
+}
+
+.availability-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--forest);
+  box-shadow: 0 0 0 0 var(--forest);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--forest) 55%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 8px transparent; }
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 30px;
+}
+
+.button {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
   text-decoration: none;
-  background: #eef3fa;
-  border: 1px solid #c5d6ee;
-  border-radius: 4px;
-  padding: 2px 8px;
+  color: var(--ink);
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
 }
 
-.project-body .links a:hover {
-  background: #dce9f7;
-  text-decoration: none;
+.button:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.button-primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+
+.affiliations {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.logo {
+  height: 58px;
+  width: auto;
+}
+
+.logo-eth { height: 38px; }
+
+@media (prefers-color-scheme: dark) {
+  .logo-eth { filter: invert(1); }
+}
+
+/* Staggered entrance of the hero text */
+.js .hero-text > * {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.js .hero-text > :nth-child(2) { animation-delay: 0.06s; }
+.js .hero-text > :nth-child(3) { animation-delay: 0.12s; }
+.js .hero-text > :nth-child(4) { animation-delay: 0.18s; }
+.js .hero-text > :nth-child(5) { animation-delay: 0.24s; }
+.js .hero-text > :nth-child(6) { animation-delay: 0.3s; }
+.js .hero-text > :nth-child(7) { animation-delay: 0.36s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
 }
 
 /* =========================
@@ -262,99 +526,896 @@ section { scroll-margin-top: var(--nav-offset); }
   position: sticky;
   top: 0;
   z-index: 50;
-
-  width: 100%;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid #eee;
-
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
+  height: var(--nav-height);
+  /* nearly opaque, so signposts sliding away underneath don't shine through */
+  background: color-mix(in srgb, var(--paper) 97%, transparent);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .nav {
-  display: inline-flex;
-  gap: 8px;
-  padding: 6px;
-  border: 1px solid #eee;
-  border-radius: 999px;
-  background: #fafafa;
+  height: 100%;
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 12px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+
+.nav::-webkit-scrollbar { display: none; }
 
 .nav a {
-  padding: 8px 12px;
-  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
-  color: #333;
-  font-size: 0.95em;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.nav a:hover {
-  background: #ffffff;
-  border: 1px solid #e9e9e9;
+.nav a:hover,
+.nav a.is-current {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* Small yellow sign at the right end of the bar keeps the availability in
+   view while scrolling; only where it fits next to the centred links. */
+.nav-availability { display: none; }
+
+@media (min-width: 1100px) {
+  .nav-availability {
+    position: absolute;
+    top: 50%;
+    right: max(16px, calc((100% - var(--container-w)) / 2));
+    translate: 0 -50%;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: var(--trail-yellow);
+    color: var(--trail-ink);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  .nav-availability:hover { background: #ffbb2e; }
 }
 
 /* =========================
-   Project cards
+   Sections
+   ========================= */
+
+h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Section headings are Swiss mountain-trail signposts: a white location plate,
+   the yellow sign, and the white-red-white tip that marks mountain trails. */
+.signpost {
+  display: inline-flex;
+  align-items: stretch;
+  height: 100%;
+  max-width: 100%;
+  color: var(--trail-ink);
+  /* hairline outline first, so the white plate and tip stand out from the paper */
+  filter: drop-shadow(0 0 0.6px rgba(0, 0, 0, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+}
+
+.signpost-index {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  /* two small screw heads, like the mounting holes on the real signs */
+  background:
+    radial-gradient(circle, #9a958a 1.6px, transparent 2.2px) 50% 5px / 6px 6px no-repeat,
+    radial-gradient(circle, #9a958a 1.6px, transparent 2.2px) 50% calc(100% - 5px) / 6px 6px no-repeat,
+    #ffffff;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.signpost-name {
+  display: flex;
+  align-items: center;
+  padding: 0 18px 0 16px;
+  background: var(--trail-yellow);
+}
+
+.signpost::after {
+  content: "";
+  flex: 0 0 30px;
+  background: linear-gradient(#ffffff 0 36%, var(--trail-red) 36% 64%, #ffffff 64% 100%);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* About and research interests share one screen: text left, interests right */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.about-lead {
+  font-size: clamp(1.35rem, 2.1vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  margin: 0 0 22px;
+}
+
+.about-text p:not(.about-lead) {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+/* Small key-value block, set like the data box in a map margin */
+.about-facts {
+  display: grid;
+  gap: 6px;
+  margin: 22px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.about-facts div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.about-facts dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.about-facts dd {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+/* Keyword legend: each group gets its own map line symbol, repeated on its tags */
+.about-legend {
+  display: grid;
+  gap: 24px;
+}
+
+.legend-methods { --legend-color: var(--accent); }
+.legend-fields { --legend-color: var(--water); }
+.legend-tools { --legend-color: var(--contour); }
+
+.legend-group .label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.legend-group .label::before {
+  content: "";
+  width: 26px;
+  border-top: 3px solid var(--legend-color);
+}
+
+/* The methods are drawn as the dashed red line of a marked trail */
+.legend-methods .label::before { border-top-style: dashed; }
+
+.interest-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Styled like a map legend entry: the group's line symbol before each label */
+.interest-tags li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 6px 14px 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  transition: border-color 0.15s ease;
+}
+
+.interest-tags li::before {
+  content: "";
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--legend-color, var(--contour));
+}
+
+.interest-tags li:hover { border-color: var(--legend-color, var(--contour)); }
+
+/* =========================
+   Publications and projects (one per step)
    ========================= */
 
 .project {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 18px;
-  align-items: start;
-
-  background: #fafafa;
-  padding: 18px;
-  border-radius: 10px;
-  border: 1px solid #dcdcdc;
-  margin-bottom: 22px;
-
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  grid-template-columns: 360px 1fr;
+  gap: 36px;
+  align-items: center;
 }
 
-.project:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+/* Figures keep a white mat in both themes because the plots are drawn on white */
+.project-media {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  overflow: hidden;
 }
 
 .project-img {
+  display: block;
   width: 100%;
   height: auto;
-  object-fit: contain;
-  padding: 10px;
-  background: #fff;
-  border: 1px solid #ededed;
-  border-radius: 10px;
-  box-sizing: border-box;
+  transition: transform 0.35s ease;
 }
 
+.project:hover .project-img { transform: scale(1.03); }
+
 .project-body h3 {
-  margin: 0 0 8px 0;
-  line-height: 1.25;
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
+
+.project-details p:not(.links) {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  margin: 0 0 10px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.links a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--water);
+  background: var(--water-soft);
+  border-radius: 4px;
+  padding: 4px 9px;
+  transition: background 0.15s ease;
+}
+
+.links a::after { content: " ↗"; }
+
+.links a:hover { background: color-mix(in srgb, var(--water) 20%, transparent); }
+
+/* One headline result per entry, set before the description */
+.project-details p.key-figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 10px;
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.key-figure strong {
+  font-size: 1.2rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* =========================
+   Education and teaching
+   ========================= */
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 8px;
+}
+
+/* The route so far, drawn like the elevation profile printed beside a hiking
+   route: one time axis for the profile, the education and the teaching lanes.
+   Positions come from the years set inline (--year, --from, --to). */
+.route {
+  --profile-height: 150px;
+}
+
+.route-profile {
+  position: relative;
+  height: var(--profile-height);
+  margin-top: 28px;
+}
+
+.route-profile svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.route-walked,
+.route-ahead {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.route-walked { stroke: var(--ink); }
+
+/* The part still ahead is the dashed red line of a marked trail */
+.route-ahead {
+  stroke: var(--accent);
+  stroke-dasharray: 5 5;
+}
+
+.route-waypoints {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+/* The label sits above its point on the profile, the dot marks the point */
+.route-waypoints li {
+  position: absolute;
+  left: calc((var(--year) - var(--route-start)) / var(--route-years) * 100%);
+  bottom: calc(var(--height) * 100%);
+  translate: -50% 0;
+  padding-bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.route-waypoints li::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  translate: -50% 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+.route-waypoints li.is-below,
+.route-waypoints li.is-today {
+  bottom: auto;
+  top: calc((1 - var(--height)) * 100%);
+  padding: 12px 0 0;
+}
+
+.route-waypoints li.is-below::after,
+.route-waypoints li.is-today::after {
+  bottom: auto;
+  top: -5px;
+}
+
+/* "You are here": a filled red dot with a halo */
+.route-waypoints li.is-today { color: var(--accent); }
+
+.route-waypoints li.is-today::after {
+  background: var(--accent);
+  border-color: var(--paper);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* The summit uses the map's summit triangle; its label ends at the triangle */
+.route-waypoints li.is-summit {
+  translate: calc(-100% + 8px) 0;
+  padding-bottom: 14px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.route-waypoints li.is-summit::after {
+  left: auto;
+  right: 0;
+  bottom: -2px;
+  translate: 0 0;
+  width: 16px;
+  height: 13px;
+  border: none;
+  border-radius: 0;
+  background: var(--accent);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.route-axis {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--route-years), 1fr);
+  border-top: 1px solid var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+}
+
+.route-axis li {
+  padding: 4px 0 0 5px;
+  border-left: 1px solid var(--line);
+}
+
+.route-lanes {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.route-lane .label { margin: 0 0 2px; }
+
+.route-lane-education { --lane-color: var(--contour); }
+.route-lane-teaching { --lane-color: var(--water); }
+
+.route-lane ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each entry's text starts where its first bar starts. Bars inherit --from
+   and --to from the entry; an entry with several periods (a course taught
+   every autumn) sets them on each bar instead. */
+.route-lane li {
+  position: relative;
+  padding: 5px 0 13px calc((var(--from) - var(--route-start)) / var(--route-years) * 100%);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.route-bar {
+  position: absolute;
+  left: calc((var(--from) - var(--route-start)) / var(--route-years) * 100%);
+  bottom: 4px;
+  width: calc((var(--to) - var(--from)) / var(--route-years) * 100%);
+  min-width: 5px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--lane-color);
+  transform-origin: left;
+}
+
+.route-lane strong { font-weight: 600; }
+
+.route-meta {
+  margin-left: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+/* Ongoing periods: solid up to today, dashed beyond it */
+.route-bar.is-ongoing {
+  --walked: calc((var(--today) - var(--from)) / (var(--to) - var(--from)) * 100%);
+  background:
+    linear-gradient(90deg, var(--lane-color) var(--walked), transparent var(--walked)),
+    repeating-linear-gradient(90deg, var(--lane-color) 0 6px, transparent 6px 10px) right / calc(100% - var(--walked)) 100% no-repeat;
+}
+
+.route-lane-education .route-bar.is-ongoing { --lane-color: var(--accent); }
 
 /* =========================
    Footer
    ========================= */
 
+/* Without this snap point the page could never settle at its very bottom */
 footer {
-  margin-top: 60px;
-  padding-top: 20px;
-  border-top: 1px solid #ddd;
-  font-size: 0.85em;
-  color: #777;
+  scroll-snap-align: end;
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 20px 40px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
   text-align: center;
+}
+
+/* Small paper label so the footer stays readable on top of the map */
+footer p {
+  display: inline-block;
+  margin: 0;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 95%, transparent);
+}
+
+/* =========================
+   Stages: publications and projects
+   On small or short screens every entry is its own full-screen step. On large
+   screens (and with JS) the chapter becomes a pinned "stage": the entries form
+   a trail of waypoints on the left, the active one opens up, and its figure
+   is shown large on the right. Scrolling walks the trail one entry at a time.
+   ========================= */
+
+.stage-track { view-timeline: --stage; }
+
+.stage-spacer { display: none; }
+
+.stage .project {
+  min-height: calc(100svh - var(--nav-height));
+  align-content: center;
+  padding: var(--heading-space) 0 48px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+@media screen and (min-width: 1040px) and (min-height: 720px) {
+  .js .stage-track {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .js .stage-spacer {
+    display: block;
+    height: calc(100svh - var(--nav-height));
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .js .stage {
+    position: sticky;
+    top: var(--nav-height);
+    height: calc(100svh - var(--nav-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--heading-space) - 24px) 0 24px;
+  }
+
+  .js .stage-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    column-gap: 56px;
+    align-items: center;
+  }
+
+  /* Entries dissolve into the grid: bodies stack in the left column, all
+     figures share one cell on the right and cross-fade. */
+  .js .stage .project {
+    display: contents;
+    scroll-snap-align: none;
+  }
+
+  /* --entries (set on each stage in index.html) is the number of entries */
+  .js .stage .project-media {
+    grid-column: 2;
+    grid-row: 1 / span var(--entries, 3);
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+    transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .js .stage .project-img {
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100svh - var(--nav-height) - var(--heading-space) - 110px);
+  }
+
+  .js .stage .project.is-active .project-media {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .js .stage .project-body {
+    grid-column: 1;
+    position: relative;
+    padding: 14px 0 14px 42px;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+  }
+
+  .js .stage .project.is-active .project-body { opacity: 1; }
+
+  .js .stage .project-body h3 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+  }
+
+  .js .stage .project-body .meta { margin: 0; }
+
+  /* Only the active entry shows its description and links */
+  .js .stage .project-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .js .stage .project-details > div {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .js .stage .project.is-active .project-details { grid-template-rows: 1fr; }
+
+  .js .stage .project-details p:first-child { margin-top: 12px; }
+
+  /* The trail: a dashed red route with one waypoint per entry */
+  .js .stage .project-body::before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    border-left: 2px dashed color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+
+  .js .stage .project:first-child .project-body::before { top: 26px; }
+  .js .stage .project:last-child .project-body::before { bottom: auto; height: 26px; }
+
+  .js .stage .project-body::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 18px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--paper);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .js .stage .project.is-active .project-body::after {
+    background: var(--accent);
+    box-shadow: 0 0 0 5px var(--accent-soft);
+  }
+}
+
+/* Waypoints that are not open shrink to a one-line title, so a trail of four
+   entries still fits on one screen */
+@media screen and (min-width: 1040px) and (min-height: 720px) {
+  .js .stage .project:not(.is-active) .project-body h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .js .stage .project:not(.is-active) .meta { display: none; }
+}
+
+/* Laptop screens: tighten the stage text so all entries still fit */
+@media screen and (min-width: 1040px) and (min-height: 720px) and (max-height: 860px) {
+  .js .stage .project-body { padding-block: 10px; }
+  .js .stage .project-body h3 { font-size: 1.05rem; }
+  .js .stage .project-details p:not(.links) { font-size: 0.88rem; line-height: 1.45; }
+  .js .stage .key-figure { margin-bottom: 4px; }
+  .js .stage .key-figure strong { font-size: 1.05rem; }
+}
+
+/* Short screens: a flatter profile, tighter lanes and a smaller about text
+   keep each step on one screen */
+@media screen and (max-height: 860px) {
+  .hero { padding-block: 40px 48px; }
+  .about-lead { font-size: clamp(1.25rem, 1.8vw, 1.45rem); margin-bottom: 14px; }
+  .about-text p:not(.about-lead) { font-size: 0.95rem; }
+  .about-facts { margin-top: 14px; padding-top: 12px; }
+  .about-legend { gap: 12px; }
+  .legend-group .label { margin-bottom: 6px; }
+  .interest-tags { gap: 6px; }
+  .interest-tags li { padding-block: 3px; font-size: 0.84rem; }
+  .route { --profile-height: 110px; }
+  .route-lanes { gap: 8px; }
+  .route-lane li { padding-block: 3px 11px; }
+}
+
+/* =========================
+   Step transitions
+   Where the browser supports scroll-driven animations, each step's content
+   rises in as it arrives and lifts away as it leaves, so moving from step to
+   step reads as a cross-fade. Elsewhere the content is simply visible.
+   ========================= */
+
+@supports (animation-timeline: view()) {
+  .step-content {
+    animation: step-in-and-out linear both;
+    animation-timeline: --step;
+  }
+
+  /* One step per entry: animate the entry's children, never the snap area
+     itself or an ancestor of it, or snapping would chase the moving box. */
+  .stage .project { view-timeline: --entry; }
+
+  .stage .project > * {
+    animation: step-in-and-out linear both;
+    animation-timeline: --entry;
+  }
+
+  /* The walked part of the route is drawn and the lane bars grow as the
+     chapter arrives */
+  .route-walked {
+    stroke-dasharray: 1;
+    animation: route-draw linear both;
+    animation-timeline: --step;
+    animation-range: entry 30% entry 100%;
+  }
+
+  .route-bar {
+    animation: bar-grow linear both;
+    animation-timeline: --step;
+    animation-range: entry 40% entry 100%;
+  }
+
+  .hero-grid {
+    animation: hero-out linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 100%;
+  }
+}
+
+/* Pinned stage: the snap points are the track and its spacers, so the whole
+   stage content can fade in and out with the chapter. */
+@supports (animation-timeline: view()) {
+  @media screen and (min-width: 1040px) and (min-height: 720px) {
+    .js .stage .project > * { animation: none; }
+
+    .js .stage-content {
+      animation: stage-in-and-out linear both;
+      animation-timeline: --stage;
+    }
+  }
+}
+
+@keyframes step-in-and-out {
+  entry 0% { opacity: 0; transform: translateY(90px) scale(0.97); }
+  entry 80% { opacity: 1; transform: none; }
+  exit 20% { opacity: 1; transform: none; }
+  exit 100% { opacity: 0; transform: translateY(-90px) scale(0.97); }
+}
+
+/* A stage spans several screens, so it fades only as the chapter arrives and leaves */
+@keyframes stage-in-and-out {
+  entry 0% { opacity: 0; transform: translateY(90px) scale(0.97); }
+  entry 85% { opacity: 1; transform: none; }
+  exit 15% { opacity: 1; transform: none; }
+  exit 100% { opacity: 0; transform: translateY(-90px) scale(0.97); }
+}
+
+@keyframes route-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes bar-grow {
+  from { transform: scaleX(0); }
+  to { transform: none; }
+}
+
+@keyframes hero-out {
+  to { opacity: 0; transform: translateY(-90px); }
+}
+
+/* On paper every step must be visible and needs no full-screen height */
+@media print {
+  .step-content, .stage-content, .stage .project > *, .hero-grid,
+  .route-walked, .route-bar { opacity: 1; transform: none; animation: none; }
+  .step, .stage .project { min-height: 0; }
+  .chapter-heading { position: static; height: auto; }
+  .nav-wrapper { display: none; }
 }
 
 /* =========================
    Responsive
    ========================= */
 
-@media (max-width: 800px) {
-  .project { grid-template-columns: 1fr; }
-  .nav { flex-wrap: wrap; justify-content: center; }
+@media (max-width: 920px) {
+  /* Text spans the full width here, so wash the whole header evenly */
+  .hero::before {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--paper) 82%, transparent) 0%,
+      color-mix(in srgb, var(--paper) 70%, transparent) 75%,
+      color-mix(in srgb, var(--paper) 30%, transparent) 100%
+    );
+  }
+}
 
-  :root { --nav-offset: 110px; }
+/* Too narrow to start each entry at its bar: text on the left, bars stay */
+@media (max-width: 960px) {
+  .route-lane li { padding-left: 0; white-space: normal; }
+  .route-meta { display: block; margin: 2px 0 0; }
+}
+
+@media (max-width: 720px) {
+  .project {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .project-body h3 { font-size: 1.2rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  :root { --heading-space: 104px; --signpost-height: 40px; }
+  .route { --profile-height: 110px; }
+  .route-waypoints li:not(.is-summit) { font-size: 0; }
+  .route-axis { font-size: 0.6rem; }
+  .route-axis li { padding-left: 3px; }
+  .nav { justify-content: flex-start; }
+  h2 { font-size: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 36px 16px 48px; }
+  .container { padding: 0 16px; }
+  .identity { gap: 16px; }
+  .portrait { width: 80px; height: 80px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .hero-text > *,
+  .availability-dot { animation: none; }
+  .step-content,
+  .stage-content,
+  .stage .project > *,
+  .hero-grid { opacity: 1; transform: none; animation: none; }
+  .route-walked, .route-bar { animation: none; }
+  .stage .project-media, .stage .project-body, .stage .project-details { transition: none; }
+  .project-img, .button { transition: none; }
+  .project:hover .project-img, .button:hover { transform: none; }
 }

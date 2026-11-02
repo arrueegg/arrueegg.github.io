@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Arno Rüegg</title>
-  <meta name="description" content="Arno Rüegg is a PhD researcher in space geodesy at ETH Zürich, specializing in machine learning for geospatial and ionospheric data, GNSS and VLBI data fusion." />
+  <meta name="description" content="Arno Rüegg is a PhD researcher in space geodesy at ETH Zürich, building multi-modal foundation models and machine-learning models with uncertainty for satellite and ground sensor data: GNSS, VLBI and the ionosphere." />
   <link rel="canonical" href="https://www.arnorueegg.ch/" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 
   <script type="application/ld+json">
@@ -25,7 +27,7 @@
     "name": "Arno Rüegg",
     "alternateName": "Arno Rueegg",
     "url": "https://www.arnorueegg.ch/",
-    "image": "https://www.arnorueegg.ch/assets/Arno_Portrait.webp",
+    "image": "https://www.arnorueegg.ch/assets/portrait.jpg",
     "jobTitle": "PhD Researcher",
     "worksFor": {
       "@type": "Organization",
@@ -36,272 +38,567 @@
       "@type": "Organization",
       "name": "ETH Zürich"
     },
-    "knowsAbout": ["Ionospheric modeling", "GNSS", "VLBI", "Machine learning", "Space geodesy"],
+    "knowsAbout": ["Foundation models", "Transformers", "Machine learning", "Uncertainty quantification", "Ionospheric modeling", "GNSS", "VLBI", "Space geodesy"],
     "sameAs": [
       "https://github.com/arrueegg",
-      "https://www.linkedin.com/in/arnorueegg"
+      "https://www.linkedin.com/in/arnorueegg",
+      "https://orcid.org/0009-0004-7410-458X"
     ]
   }
   </script>
 
   <meta property="og:site_name" content="Arno Rüegg" />
-  <meta property="og:title" content="Arno Rüegg – PhD ETH Zürich" />
-  <meta property="og:description" content="Machine learning for geospatial and ionospheric data, GNSS/VLBI data fusion." />
+  <meta property="og:title" content="Arno Rüegg – Foundation models for Earth and space data · PhD ETH Zürich" />
+  <meta property="og:description" content="Multi-modal foundation models and machine-learning models with uncertainty for satellite and ground sensor data: GNSS, VLBI and the ionosphere." />
   <meta property="og:url" content="https://www.arnorueegg.ch/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://www.arnorueegg.ch/assets/Arno_Portrait.webp" />
+  <meta property="og:image" content="https://www.arnorueegg.ch/assets/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Arno Rüegg, available from summer 2027 for applied ML roles" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="512x512">
   <link rel="apple-touch-icon" href="/favicon.png">
 
+  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 
-<div class="hero" aria-hidden="true"></div>
+<div class="map-background" data-topo-map data-topo-drift-area=".hero" aria-hidden="true">
+  <canvas></canvas>
+</div>
+<div class="map-veil" aria-hidden="true"></div>
 
-<header class="header">
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="kicker">ETH Zürich · Institute of Geodesy and Photogrammetry</p>
 
-  <img src="assets/Arno_Portrait.webp" alt="Arno Rüegg" class="profile-pic">
-  <h1>Arno Rüegg</h1>
-  <p class="subtitle">PhD Researcher at ETH Zürich Institute of Geodesy and Photogrammetry · Space Geodesy & Machine Learning</p>
-  <img src="assets/logos/ETH_logo.webp" alt="ETH Zürich" class="eth-logo">
-  <img src="assets/logos/space_geodesy_logo.webp" alt="Space Geodesy" class="space-logo">
+      <div class="identity">
+        <img src="assets/portrait.webp" alt="Portrait of Arno Rüegg" class="portrait" width="480" height="480">
+        <h1>Arno<br>Rüegg</h1>
+      </div>
 
-  <p class="links header-links">
-    <a href="mailto:arno.rueegg@gmail.com">Email</a>
-    <a href="https://github.com/arrueegg">GitHub</a>
-    <a href="https://www.linkedin.com/in/arnorueegg">LinkedIn</a>
-    <a href="https://orcid.org/0009-0004-7410-458X" target="_blank" rel="noopener">ORCID</a>
-    <a href="assets/CV_Arno.pdf">CV</a>
-  </p>
+      <p class="positioning">
+        I build <em>foundation models</em> that fuse satellite and ground
+        sensor data, and know how uncertain they are.
+      </p>
+      <p class="positioning-detail">
+        PhD researcher in space geodesy at ETH Zürich, finishing in 2027
+        and looking for my next route in industry.
+      </p>
+
+      <!-- Availability as a Swiss trail signpost: white location plate, yellow
+           direction sign listing the kinds of roles, and the pole. -->
+      <aside class="hero-sign" aria-label="Availability">
+        <p class="hero-sign-plate">
+          <span class="hero-sign-caption"><span class="availability-dot" aria-hidden="true"></span>Available from</span>
+          <strong>Summer 2027</strong>
+        </p>
+        <div class="hero-sign-arrow">
+          <p class="hero-sign-caption">Open to applied ML roles in</p>
+          <ul>
+            <li>Weather &amp; climate modelling</li>
+            <li>Remote sensing &amp; Earth observation</li>
+            <li>Navigation &amp; GNSS</li>
+            <li>Geospatial analytics</li>
+          </ul>
+        </div>
+        <span class="hero-sign-pole" aria-hidden="true"></span>
+      </aside>
+
+      <p class="contact-links">
+        <a class="button button-primary" href="mailto:arno.rueegg@gmail.com">Email</a>
+        <a class="button" href="assets/CV_Arno.pdf">CV (PDF)</a>
+        <a class="button" href="https://github.com/arrueegg">GitHub</a>
+        <a class="button" href="https://www.linkedin.com/in/arnorueegg">LinkedIn</a>
+        <a class="button" href="https://orcid.org/0009-0004-7410-458X" target="_blank" rel="noopener">ORCID</a>
+      </p>
+
+      <div class="affiliations">
+        <img src="assets/logos/ETH_logo.webp" alt="ETH Zürich" class="logo logo-eth" width="775" height="283">
+        <img src="assets/logos/space_geodesy_logo_small.webp" alt="Space Geodesy group" class="logo" width="480" height="240">
+      </div>
+    </div>
+  </div>
 </header>
 
-<!-- Sticky navigation -->
 <div class="nav-wrapper">
   <nav class="nav" aria-label="Page navigation">
     <a href="#about">About</a>
-    <a href="#interests">Interests</a>
     <a href="#publications">Publications</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
-    <a href="#teaching">Teaching</a>
   </nav>
+  <a class="nav-availability" href="mailto:arno.rueegg@gmail.com"><span class="availability-dot" aria-hidden="true"></span>Available summer 2027</a>
 </div>
 
-<div class="container">
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      I am a PhD researcher in geomatics at ETH Zürich, specializing in machine
-      learning for geospatial data modeling. My research focuses on ionospheric
-      mapping and data fusion using GNSS and VLBI observations, with an emphasis
-      on large-scale deep learning and HPC-based workflows.
-    </p>
-    <p>
-      I have strong experience with PyTorch, parameter estimation, and
-      large-scale data processing. During my Master's, I worked on computer
-      vision and multi-sensor data fusion for remote sensing applications.
-    </p>
-  </section>
+<main class="container">
+  <section id="about" class="chapter">
+    <h2 class="chapter-heading"><span class="signpost"><span class="signpost-index">01</span><span class="signpost-name">About</span></span></h2>
 
-  <section id="interests">
-    <h2>Research Interests</h2>
-    <div class="interest-tags">
-      <span>Ionospheric modeling</span>
-      <span>GNSS</span>
-      <span>VLBI</span>
-      <span>Data fusion</span>
-      <span>Machine learning for geophysics</span>
-      <span>Probabilistic modelling</span>
-      <span>Large-scale ML &amp; HPC</span>
-      <span>Remote sensing</span>
-      <span>Weather modelling</span>
-      <span>Foundation models</span>
-    </div>
-  </section>
-
-  <section id="publications">
-    <h2>Publications</h2>
-
-    <div class="item project">
-      <img class="project-img" src="assets/projects/STEC.png" alt="STEC ML project image">
-      <div class="project-body">
-        <h3>Probabilistic Machine Learning for Slant Total Electron Content Modelling based on GNSS</h3>
-        <p>
-          Development of a data-driven model for slant total electron content (STEC)
-          estimation directly from GNSS observations, bypassing single-layer assumptions
-          and mapping functions. The approach leverages deep learning to model spatiotemporal
-          ionospheric variability and provides uncertainty estimates alongside the STEC.
-          Models are pre-trained on historical data and fine-tuned daily to achieve improved
-          accuracy compared to standard GIM-based corrections.
-        </p>
-        <p class="meta">ESS Open Archive preprint · Under review</p>
-        <p class="links">
-          <strong>Links:</strong>
-          <a href="https://essopenarchive.org/doi/full/10.22541/essoar.15003406/v1" target="_blank" rel="noopener">Preprint</a>
-          <a href="https://github.com/arrueegg/PNN_STEC" target="_blank" rel="noopener">Code (GitHub)</a>
-        </p>
+    <div class="step">
+      <div class="step-content about-grid">
+        <div class="about-text">
+          <p class="about-lead">
+            Right now I am building Hemera, a foundation model that reads six kinds
+            of observations at once <em>and forecasts the global ionosphere a day ahead.</em>
+          </p>
+          <p>
+            I am a PhD researcher in the Space Geodesy group at ETH Zürich. My
+            research focuses on ionospheric mapping, forecasting and data fusion
+            from GNSS, VLBI, satellite altimetry and radio occultation, using
+            transformer-based foundation models and probabilistic deep learning on
+            GPU clusters. I have strong experience with PyTorch, parameter
+            estimation and large-scale data processing. During my Master's I worked
+            on computer vision and multi-sensor data fusion for remote sensing.
+          </p>
+          <p>
+            The same toolbox fits wherever sensors are noisy and decisions need
+            error bars: weather and climate modelling, remote sensing, navigation
+            and geospatial analytics.
+          </p>
+          <dl class="about-facts">
+            <div><dt>Languages</dt><dd>German (native) · English (fluent) · French (basic)</dd></div>
+            <div><dt>Leadership</dt><dd>Four years as head of a scout department: four teams of 6–8 leaders</dd></div>
+            <div><dt>Off the clock</dt><dd>Hiking · Skiing · Football · Scouting</dd></div>
+          </dl>
+        </div>
+        <!-- Keywords as a map legend: each group has its own line symbol -->
+        <div class="about-legend">
+          <div class="legend-group legend-methods">
+            <h3 class="label">Methods</h3>
+            <ul class="interest-tags">
+              <li>Foundation models</li>
+              <li>Transformers</li>
+              <li>Self-supervised pretraining</li>
+              <li>Multi-modal data fusion</li>
+              <li>Probabilistic deep learning</li>
+              <li>Uncertainty quantification</li>
+              <li>Spatiotemporal forecasting</li>
+              <li>Computer vision</li>
+            </ul>
+          </div>
+          <div class="legend-group legend-fields">
+            <h3 class="label">Fields</h3>
+            <ul class="interest-tags">
+              <li>Ionosphere &amp; space weather</li>
+              <li>GNSS &amp; VLBI</li>
+              <li>Earth observation</li>
+              <li>Weather &amp; climate</li>
+            </ul>
+          </div>
+          <div class="legend-group legend-tools">
+            <h3 class="label">Toolkit</h3>
+            <ul class="interest-tags">
+              <li>Python</li>
+              <li>PyTorch</li>
+              <li>NumPy &amp; pandas</li>
+              <li>xarray &amp; Zarr</li>
+              <li>GPU clusters (SLURM)</li>
+              <li>Weights &amp; Biases</li>
+              <li>Bash &amp; Git</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="item project">
-      <img class="project-img" src="assets/projects/Fusion.png" alt="GNSS + VLBI fusion project image">
-      <div class="project-body">
-        <h3>Fusion of GNSS and VLBI Data for Global Ionospheric Mapping</h3>
-        <p>
-          Machine learning–based data fusion framework combining dense GNSS-derived VTEC
-          with sparse but complementary VLBI observations. Two fusion strategies are investigated:
-          direct assimilation of station-based VLBI VTEC and end-to-end integration of VLBI
-          differential TEC (DTEC). A weighted loss balances heterogeneous data volumes, with
-          evaluation against independent Jason-3 altimetry measurements over a full year.
-        </p>
-        <p class="meta">IAG – Geodesy for a Changing Environment 2025 · Poster</p>
-        <p class="links">
-          <strong>Links:</strong>
-          <a href="https://link.springer.com/chapter/10.1007/1345_2026_315" target="_blank" rel="noopener">Springer</a>
-          <a href="https://www.research-collection.ethz.ch/bitstreams/2b814f06-1d6e-4784-b6b7-cb33d2eb5f26/download" target="_blank" rel="noopener">Poster (PDF)</a>
-          <a href="https://github.com/arrueegg/GIM_fusion_VLBI" target="_blank" rel="noopener">Code (GitHub)</a>
-        </p>
-      </div>
-    </div>
-
-    <div class="item project">
-      <img class="project-img" src="assets/projects/Comparative_Analysis.png" alt="VLBI and VGOS VTEC vs GIM image">
-      <div class="project-body">
-        <h3>A Comparative Study of VTEC Estimates Derived from S/X VLBI and VGOS Observations</h3>
-        <p>
-          Comparative analysis of vertical total electron content (VTEC) estimates derived from
-          colocated S/X VLBI and VGOS observations during simultaneous sessions. Results show
-          good agreement with GNSS-based Global Ionosphere Maps (GIM) and indicate improved
-          stability for VGOS under increased solar activity, highlighting its potential for more robust
-          ionospheric monitoring during disturbed conditions.
-        </p>
-        <p class="meta">AGU Space Weather · Code + data available</p>
-        <p class="links">
-          <strong>Links:</strong>
-          <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025SW004540" target="_blank" rel="noopener">AGU Space Weather</a>
-          <a href="https://doi.org/10.3929/ethz-b-000700325" target="_blank" rel="noopener">Dataset</a>
-          <a href="https://www.gitlab.ethz.ch/spacegeodesy_public/vlbiono" target="_blank" rel="noopener">VLBIono (GitLab)</a>
-        </p>
-      </div>
-    </div>
-
   </section>
 
-  <section id="projects">
-    <h2>Projects &amp; Theses</h2>
+  <section id="publications" class="chapter">
+    <h2 class="chapter-heading"><span class="signpost"><span class="signpost-index">02</span><span class="signpost-name">Publications</span></span></h2>
 
-    <div class="item project">
-      <img class="project-img" src="assets/projects/Masterthesis.png" alt="Sentinel-1/2 embedding project image">
-      <div class="project-body">
-        <h3>Master Thesis: A Shared Deep Feature Embedding of Sentinel-1 and Sentinel-2 for Building Detection</h3>
-        <p>
-          Joint deep learning framework for building segmentation using SAR (Sentinel-1) and optical
-          (Sentinel-2) imagery. The work explores domain consistency through adversarial learning and
-          input augmentation, enabling improved single-domain inference while leveraging multi-sensor
-          information during training.
-        </p>
-        <p class="links">
-          <strong>Links:</strong>
-          <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/2023/R%C3%BCegg_Arno_MSc_2023.pdf" target="_blank" rel="noopener">Thesis (PDF)</a>
-        </p>
+    <div class="stage-track">
+      <div class="stage">
+        <div class="stage-content" style="--entries: 4">
+          <article class="project">
+            <div class="project-media">
+              <img class="project-img" src="assets/projects/Hemera.webp" alt="Hemera overview: observations from six sources are tokenised, fused into a latent analysis state, rolled forward in 24 h steps and decoded" loading="lazy" width="1440" height="793">
+            </div>
+            <div class="project-body">
+              <h3>Hemera: a Multi-Modal Foundation Model for the Global Ionospheric State</h3>
+              <p class="meta">Paper in preparation · Work in progress</p>
+              <div class="project-details"><div>
+                <p class="key-figure"><strong>6 data sources, 16 years</strong> fused into one 89M-parameter transformer</p>
+                <p>
+                  A foundation model for the ionosphere in the spirit of modern weather models. A
+                  Perceiver-style transformer fuses ionosphere maps, ground and slant GNSS, satellite
+                  altimetry, radio occultation and space-weather indices into one latent state of the
+                  global ionosphere, rolls it forward in 24 h steps and decodes any observable at any
+                  position. Pretrained by predicting observations it was not shown, then fine-tuned for
+                  analysis and forecasting.
+                </p>
+              </div></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-media">
+              <img class="project-img" src="assets/projects/STEC.webp" alt="Architecture of the probabilistic STEC network" loading="lazy" width="960" height="583">
+            </div>
+            <div class="project-body">
+              <h3>Probabilistic Machine Learning for Slant Total Electron Content Modelling based on GNSS</h3>
+              <p class="meta">Submitted to JGR: Machine Learning and Computation · Preprint</p>
+              <div class="project-details"><div>
+                <p class="key-figure"><strong>24.5% lower</strong> single-frequency positioning error than with the IGS global ionosphere maps</p>
+                <p>
+                  Predicts the slant total electron content (STEC) of every GNSS observation directly,
+                  without the thin-shell mapping functions behind standard ionosphere maps. A residual
+                  MLP with a variational Bayesian output layer is pretrained on eleven years of GNSS data
+                  and fine-tuned for each day, and returns an uncertainty for every observation. At
+                  held-out stations it beats the IGS maps on 96% of test days, most clearly at low elevations.
+                </p>
+                <p class="links">
+                  <a href="https://essopenarchive.org/doi/full/10.22541/essoar.15003406/v1" target="_blank" rel="noopener">Preprint</a>
+                  <a href="https://github.com/arrueegg/PNN_STEC" target="_blank" rel="noopener">Code (GitHub)</a>
+                </p>
+              </div></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-media">
+              <img class="project-img" src="assets/projects/Fusion.webp" alt="Global VTEC map from VLBI and GNSS fusion" loading="lazy" width="960" height="480">
+            </div>
+            <div class="project-body">
+              <h3>Fusion of GNSS and VLBI Data for Global Ionospheric Mapping</h3>
+              <p class="meta">IAG – Geodesy for a Changing Environment 2025</p>
+              <div class="project-details"><div>
+                <p class="key-figure"><strong>≈50% lower</strong> median residuals than GNSS-only maps near VLBI sites, checked against Jason-3 altimetry</p>
+                <p>
+                  Machine learning–based data fusion framework combining dense GNSS-derived VTEC
+                  with sparse but complementary VLBI observations. Two fusion strategies are investigated:
+                  direct assimilation of station-based VLBI VTEC and end-to-end integration of VLBI
+                  differential TEC (DTEC). A weighted loss balances heterogeneous data volumes, with
+                  evaluation against independent Jason-3 altimetry measurements over a full year.
+                </p>
+                <p class="links">
+                  <a href="https://link.springer.com/chapter/10.1007/1345_2026_315" target="_blank" rel="noopener">Springer</a>
+                  <a href="https://www.research-collection.ethz.ch/bitstreams/2b814f06-1d6e-4784-b6b7-cb33d2eb5f26/download" target="_blank" rel="noopener">Poster (PDF)</a>
+                  <a href="https://github.com/arrueegg/GIM_fusion_VLBI" target="_blank" rel="noopener">Code (GitHub)</a>
+                </p>
+              </div></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-media">
+              <img class="project-img" src="assets/projects/Comparative_Analysis.webp" alt="VTEC time series from S/X VLBI and VGOS compared with GIM" loading="lazy" width="960" height="960">
+            </div>
+            <div class="project-body">
+              <h3>A Comparative Study of VTEC Estimates Derived from S/X VLBI and VGOS Observations</h3>
+              <p class="meta">AGU Space Weather · Code + data available</p>
+              <div class="project-details"><div>
+                <p class="key-figure"><strong>4.2 vs 5.6 TECU</strong> RMS to GIM under high solar activity: VGOS stays more stable than S/X VLBI</p>
+                <p>
+                  Comparative analysis of vertical total electron content (VTEC) estimates derived from
+                  colocated S/X VLBI and VGOS observations during simultaneous sessions. Results show
+                  good agreement with GNSS-based Global Ionosphere Maps (GIM) and indicate improved
+                  stability for VGOS under increased solar activity, highlighting its potential for more robust
+                  ionospheric monitoring during disturbed conditions.
+                </p>
+                <p class="links">
+                  <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025SW004540" target="_blank" rel="noopener">AGU Space Weather</a>
+                  <a href="https://doi.org/10.3929/ethz-b-000700325" target="_blank" rel="noopener">Dataset</a>
+                  <a href="https://www.gitlab.ethz.ch/spacegeodesy_public/vlbiono" target="_blank" rel="noopener">VLBIono (GitLab)</a>
+                </p>
+              </div></div>
+            </div>
+          </article>
+        </div>
       </div>
+      <div class="stage-spacer" aria-hidden="true"></div>
+      <div class="stage-spacer" aria-hidden="true"></div>
+      <div class="stage-spacer" aria-hidden="true"></div>
     </div>
-
-    <div class="item project">
-      <img class="project-img" src="assets/projects/IPA.png" alt="ICESat-2 vegetation mapping project image">
-      <div class="project-body">
-        <h3>Master Project: Vegetation Mapping with ICESat-2</h3>
-        <p>
-          Evaluation and bias correction of a global canopy height map using ICESat-2 laser altimetry
-          data across multiple test regions. Systematic over- and underestimation effects were analyzed
-          and mitigated using tile-wise mean corrections and spatial smoothing.
-        </p>
-        <p class="links">
-          <strong>Links:</strong>
-          <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/2022/IPA_ArnoR%C3%BCegg.pdf" target="_blank" rel="noopener">Report (PDF)</a>
-        </p>
-      </div>
-    </div>
-
-    <div class="item project">
-      <img class="project-img" src="assets/projects/Bachelorthesis.png" alt="Rock classification project image">
-      <div class="project-body">
-        <h3>Bachelor Thesis: Classification of Solid and Loose Rock on Orthophotos with Deep Learning</h3>
-        <p>
-          Deep learning–based classification of solid rock and loose material in aerial imagery for
-          permafrost-related mapping applications. Implemented with a U-Net architecture and transfer
-          learning, evaluated via cross-validation and data augmentation.
-        </p>
-        <p class="links">
-          <strong>Links:</strong>
-          <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/2021/R%C3%BCegg_Arno_BSc_2021.pdf" target="_blank" rel="noopener">Thesis (PDF)</a>
-        </p>
-      </div>
-    </div>
-
   </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <ul>
-      <li><strong>PhD Space Geodesy</strong>, ETH Zürich (2023–now)</li>
-      <li><strong>MSc Geomatics (Geoinformatics)</strong>, ETH Zürich (2021–2023)</li>
-      <li><strong>BSc Geospatial Engineering</strong>, ETH Zürich (2018–2021)</li>
-    </ul>
+  <section id="projects" class="chapter">
+    <h2 class="chapter-heading"><span class="signpost"><span class="signpost-index">03</span><span class="signpost-name">Projects &amp; Theses</span></span></h2>
+
+    <div class="stage-track">
+      <div class="stage">
+        <div class="stage-content" style="--entries: 3">
+          <article class="project">
+            <div class="project-media">
+              <img class="project-img" src="assets/projects/Masterthesis.webp" alt="Sentinel image and building ground truth" loading="lazy" width="960" height="483">
+            </div>
+            <div class="project-body">
+              <h3>A Shared Deep Feature Embedding of Sentinel-1 and Sentinel-2 for Building Detection</h3>
+              <p class="meta">Master thesis · ETH Zürich · 2023</p>
+              <div class="project-details"><div>
+                <p class="key-figure"><strong>+3.1 pts IoU</strong> on validation from Stable Diffusion VAE features as extra input</p>
+                <p>
+                  Joint deep learning framework for building segmentation using SAR (Sentinel-1) and optical
+                  (Sentinel-2) imagery. The work explores domain consistency through adversarial learning and
+                  input augmentation, enabling improved single-domain inference while leveraging multi-sensor
+                  information during training.
+                </p>
+                <p class="links">
+                  <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/2023/R%C3%BCegg_Arno_MSc_2023.pdf" target="_blank" rel="noopener">Thesis (PDF)</a>
+                </p>
+              </div></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-media">
+              <img class="project-img" src="assets/projects/IPA.webp" alt="Canopy height maps before and after bias correction" loading="lazy" width="960" height="409">
+            </div>
+            <div class="project-body">
+              <h3>Vegetation Mapping with ICESat-2</h3>
+              <p class="meta">Master project · ETH Zürich · 2022</p>
+              <div class="project-details"><div>
+                <p class="key-figure"><strong>7.6 → 6.0 m</strong> mean canopy-height RMSE against ICESat-2 in seven regions worldwide</p>
+                <p>
+                  Evaluation and bias correction of a global canopy height map using ICESat-2 laser altimetry
+                  data across multiple test regions. Systematic over- and underestimation effects were analyzed
+                  and mitigated using tile-wise mean corrections and spatial smoothing.
+                </p>
+                <p class="links">
+                  <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/2022/IPA_ArnoR%C3%BCegg.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+                </p>
+              </div></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-media">
+              <img class="project-img" src="assets/projects/Bachelorthesis.webp" alt="Aerial image, ground truth and predicted rock classes" loading="lazy" width="960" height="268">
+            </div>
+            <div class="project-body">
+              <h3>Classification of Solid and Loose Rock on Orthophotos with Deep Learning</h3>
+              <p class="meta">Bachelor thesis · ETH Zürich · 2021</p>
+              <div class="project-details"><div>
+                <p class="key-figure"><strong>84.5%</strong> test accuracy, ±0.9% across five cross-validation models</p>
+                <p>
+                  Deep learning–based classification of solid rock and loose material in aerial imagery for
+                  permafrost-related mapping applications. Implemented with a U-Net architecture and transfer
+                  learning, evaluated via cross-validation and data augmentation.
+                </p>
+                <p class="links">
+                  <a href="https://ethz.ch/content/dam/ethz/special-interest/baug/igp/photogrammetry-remote-sensing-dam/documents/pdf/Student_Theses/2021/R%C3%BCegg_Arno_BSc_2021.pdf" target="_blank" rel="noopener">Thesis (PDF)</a>
+                </p>
+              </div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="stage-spacer" aria-hidden="true"></div>
+      <div class="stage-spacer" aria-hidden="true"></div>
+    </div>
   </section>
 
-  <section id="teaching">
-    <h2>Teaching</h2>
-    <ul>
-      <li>Assistant, Linear Algebra (ETH Zürich, 2022)</li>
-      <li>Assistant, Geodetic Measurement Techniques (ETH Zürich, 2023–2024)</li>
-      <li>Assistant, Geodetic Data Analysis (ETH Zürich, 2023–now)</li>
-    </ul>
+  <section id="education" class="chapter">
+    <h2 class="chapter-heading"><span class="signpost"><span class="signpost-index">04</span><span class="signpost-name">Education &amp; Teaching</span></span></h2>
+
+    <div class="step">
+      <!-- The route so far as a hiking-map elevation profile. Everything shares
+           one time axis from 2018 to 2028: --year, --from and --to are years,
+           --height is the elevation on the profile (0 to 1). -->
+      <div class="step-content route" style="--route-start: 2018; --route-years: 10; --today: 2026.84">
+        <div class="route-profile">
+          <svg viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="route-fill-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--contour)" stop-opacity="0.28"/>
+                <stop offset="1" stop-color="var(--contour)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="route-fill" fill="url(#route-fill-gradient)" d="M0.0 180.0 C11.7 178.0 48.3 169.0 70.0 168.0 C91.7 167.0 110.0 177.3 130.0 174.0 C150.0 170.7 170.0 151.0 190.0 148.0 C210.0 145.0 231.7 158.3 250.0 156.0 C268.3 153.7 283.3 140.0 300.0 134.0 C316.7 128.0 333.3 121.0 350.0 120.0 C366.7 119.0 383.3 130.7 400.0 128.0 C416.7 125.3 433.3 106.7 450.0 104.0 C466.7 101.3 483.3 114.7 500.0 112.0 C516.7 109.3 533.3 90.7 550.0 88.0 C566.7 85.3 581.7 98.3 600.0 96.0 C618.3 93.7 643.3 76.7 660.0 74.0 C676.7 71.3 685.0 82.7 700.0 80.0 C715.0 77.3 733.3 60.7 750.0 58.0 C766.7 55.3 785.0 65.3 800.0 64.0 C815.0 62.7 826.0 54.0 840.0 50.0 C854.0 46.0 870.7 43.7 884.0 40.0 C897.3 36.3 907.3 32.7 920.0 28.0 C932.7 23.3 946.7 11.3 960.0 12.0 C973.3 12.7 993.3 28.7 1000.0 32.0 L1000 200 L0 200 Z"/>
+            <path class="route-walked" pathLength="1" d="M0.0 180.0 C11.7 178.0 48.3 169.0 70.0 168.0 C91.7 167.0 110.0 177.3 130.0 174.0 C150.0 170.7 170.0 151.0 190.0 148.0 C210.0 145.0 231.7 158.3 250.0 156.0 C268.3 153.7 283.3 140.0 300.0 134.0 C316.7 128.0 333.3 121.0 350.0 120.0 C366.7 119.0 383.3 130.7 400.0 128.0 C416.7 125.3 433.3 106.7 450.0 104.0 C466.7 101.3 483.3 114.7 500.0 112.0 C516.7 109.3 533.3 90.7 550.0 88.0 C566.7 85.3 581.7 98.3 600.0 96.0 C618.3 93.7 643.3 76.7 660.0 74.0 C676.7 71.3 685.0 82.7 700.0 80.0 C715.0 77.3 733.3 60.7 750.0 58.0 C766.7 55.3 785.0 65.3 800.0 64.0 C815.0 62.7 826.0 54.0 840.0 50.0 C854.0 46.0 876.7 41.7 884.0 40.0"/>
+            <path class="route-ahead" d="M884.0 40.0 C890.0 38.0 907.3 32.7 920.0 28.0 C932.7 23.3 946.7 11.3 960.0 12.0 C973.3 12.7 993.3 28.7 1000.0 32.0"/>
+          </svg>
+          <ul class="route-waypoints">
+            <li style="--year: 2021.5; --height: 0.40">BSc thesis</li>
+            <li class="--year: 2022.5" style="--year: 2022.5; --height: 0.48">Master project</li>
+            <li style="--year: 2023.5; --height: 0.56">MSc thesis</li>
+            <li style="--year: 2025.5; --height: 0.71">First journal paper</li>
+            <li class="is-today" style="--year: 2026.84; --height: 0.80">Today</li>
+            <li class="is-summit" style="--year: 2027.6; --height: 0.94">PhD Defense</li>
+          </ul>
+        </div>
+
+        <ol class="route-axis" aria-hidden="true">
+          <li>2018</li><li>2019</li><li>2020</li><li>2021</li><li>2022</li>
+          <li>2023</li><li>2024</li><li>2025</li><li>2026</li><li>2027</li>
+        </ol>
+
+        <div class="route-lanes">
+          <div class="route-lane route-lane-education">
+            <h3 class="label">Education</h3>
+            <ul>
+              <li style="--from: 2018.7; --to: 2021.6"><strong>BSc Geospatial Engineering</strong> <span class="route-meta">ETH Zürich · 2018–2021</span><span class="route-bar"></span></li>
+              <li style="--from: 2021.7; --to: 2023.6"><strong>MSc Geomatics (Geoinformatics)</strong> <span class="route-meta">ETH Zürich · 2021–2023</span><span class="route-bar"></span></li>
+              <li style="--from: 2023.7; --to: 2027.6"><strong>PhD Space Geodesy</strong> <span class="route-meta">ETH Zürich · 2023–2027</span><span class="route-bar is-ongoing"></span></li>
+            </ul>
+          </div>
+          <div class="route-lane route-lane-teaching" id="teaching">
+            <h3 class="label">Teaching assistant</h3>
+            <ul>
+              <li style="--from: 2021.1; --to: 2021.45"><strong>Linear Algebra</strong> <span class="route-meta">Feb–June 2021</span><span class="route-bar"></span></li>
+              <li style="--from: 2023.42">
+                <strong>Geodetic Measurement Techniques</strong> <span class="route-meta">June 2023 &amp; 2024</span>
+                <span class="route-bar" style="--from: 2023.42; --to: 2023.5"></span>
+                <span class="route-bar" style="--from: 2024.42; --to: 2024.5"></span>
+              </li>
+              <li style="--from: 2023.67">
+                <strong>Geodetic Data Analysis</strong> <span class="route-meta">Autumn semester, every year since 2023</span>
+                <span class="route-bar" style="--from: 2023.67; --to: 2024.15"></span>
+                <span class="route-bar" style="--from: 2024.67; --to: 2025.15"></span>
+                <span class="route-bar" style="--from: 2025.67; --to: 2026.15"></span>
+                <span class="route-bar" style="--from: 2026.67; --to: 2027.15"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-</div>
+</main>
 
 <footer>
-  <p>© 2026 Arno Rüegg · Last updated: May 2026</p>
+  <p>© 2026 Arno Rüegg · Last updated: November 2026</p>
 </footer>
 
+<script src="topo-map.js" defer></script>
 <script>
-  const colors = [
-    { bg: '#dbeafe', fg: '#1e40af' },
-    { bg: '#d1fae5', fg: '#065f46' },
-    { bg: '#ede9fe', fg: '#4c1d95' },
-    { bg: '#fef3c7', fg: '#78350f' },
-    { bg: '#fce7f3', fg: '#831843' },
-    { bg: '#ccfbf1', fg: '#134e4a' },
-    { bg: '#e0f2fe', fg: '#0c4a6e' },
-    { bg: '#f3e8ff', fg: '#581c87' },
-    { bg: '#fef9c3', fg: '#713f12' },
-    { bg: '#fee2e2', fg: '#7f1d1d' },
-  ];
-  const tags = document.querySelector('.interest-tags');
-  const chips = [...tags.querySelectorAll('span')];
-  for (let i = chips.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [chips[i], chips[j]] = [chips[j], chips[i]];
-    [colors[i], colors[j]] = [colors[j], colors[i]];
+  // The contour map stays fixed behind the page. A paper-coloured veil thickens
+  // as the header scrolls away, so the map turns into a quiet texture for reading.
+  const hero = document.querySelector(".hero");
+  const navHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-height"));
+
+  function updateMapVeil() {
+    const progress = Math.min(1, window.scrollY / Math.max(1, hero.offsetHeight * 0.8));
+    document.documentElement.style.setProperty("--map-veil-progress", progress.toFixed(3));
   }
-  chips.forEach((chip, i) => {
-    chip.style.background = colors[i % colors.length].bg;
-    chip.style.color = colors[i % colors.length].fg;
-  });
-  tags.innerHTML = '';
-  const n = chips.length;
-  const rows = n <= 8 ? [2, 4, 2] : [3, 4, 3];
-  let idx = 0;
-  for (const count of rows) {
-    const row = document.createElement('div');
-    row.className = 'interest-row';
-    for (let i = 0; i < count && idx < chips.length; i++, idx++) {
-      row.appendChild(chips[idx]);
+
+  // On large screens publications and projects are pinned stages: one screen
+  // of scrolling per entry, and the entry whose screen is reached is opened.
+  // When the stage layout is off (spacers hidden) every entry is its own step.
+  const stageTracks = [...document.querySelectorAll(".stage-track")];
+  function updateStages() {
+    for (const track of stageTracks) {
+      const screenHeight = track.querySelector(".stage-spacer").offsetHeight;
+      if (screenHeight === 0) continue;
+      const entries = track.querySelectorAll(".project");
+      const progress = (navHeight - track.getBoundingClientRect().top) / screenHeight;
+      const activeIndex = Math.min(entries.length - 1, Math.max(0, Math.round(progress)));
+      entries.forEach((entry, index) => entry.classList.toggle("is-active", index === activeIndex));
     }
-    tags.appendChild(row);
   }
+
+  let scrollUpdateQueued = false;
+  function updateOnScroll() {
+    scrollUpdateQueued = false;
+    updateMapVeil();
+    updateStages();
+  }
+  function queueScrollUpdate() {
+    if (!scrollUpdateQueued) {
+      scrollUpdateQueued = true;
+      requestAnimationFrame(updateOnScroll);
+    }
+  }
+  window.addEventListener("scroll", queueScrollUpdate, { passive: true });
+  window.addEventListener("resize", queueScrollUpdate);
+  updateOnScroll();
+
+  // Chapter scrolling for mouse wheels and trackpads: one gesture moves exactly
+  // one step. CSS scroll snapping alone lets small wheel ticks bounce back to the
+  // current step, and lets a long trackpad swipe skip several steps. Touch and
+  // keyboard scrolling are left to the browser's native snapping.
+  const WHEEL_GESTURE_PAUSE_MS = 180; // a pause this long starts a new gesture
+  const STEP_ANIMATION_TIMEOUT_MS = 1000; // fallback where "scrollend" is missing
+  const TALL_STEP_TOLERANCE_PX = 64; // chapter signposts add a little space between steps
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let isMovingToStep = false;
+  let lastWheelTime = 0;
+
+  function pageTop(element) {
+    let top = 0;
+    for (let current = element; current; current = current.offsetParent) top += current.offsetTop;
+    return top;
+  }
+
+  // Snap points depend on the layout (stage or one step per entry), so they are
+  // read from the CSS each time instead of being fixed.
+  function snapPositions() {
+    const candidates = document.querySelectorAll(".hero, .step, .stage-track, .stage-spacer, .stage .project");
+    const snapElements = [...candidates].filter((element) =>
+      element.offsetParent !== null && getComputedStyle(element).scrollSnapAlign !== "none");
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const positions = snapElements.map((element) => Math.min(maxScroll, Math.max(0, pageTop(element) - navHeight)));
+    positions.push(maxScroll); // the footer at the very bottom
+    return positions.sort((a, b) => a - b);
+  }
+
+  function currentStepIndex(positions) {
+    return Math.max(0, positions.findLastIndex((position) => position <= window.scrollY + 2));
+  }
+
+  function moveOneStep(direction) {
+    const positions = snapPositions();
+    const currentIndex = currentStepIndex(positions);
+    const targetIndex = Math.min(positions.length - 1, Math.max(0, currentIndex + direction));
+    if (positions[targetIndex] === window.scrollY) return;
+    isMovingToStep = true;
+    const finish = () => { isMovingToStep = false; };
+    window.addEventListener("scrollend", finish, { once: true });
+    setTimeout(finish, STEP_ANIMATION_TIMEOUT_MS);
+    window.scrollTo({ top: positions[targetIndex], behavior: prefersReducedMotion.matches ? "auto" : "smooth" });
+  }
+
+  // A step taller than the screen (long text on a phone) scrolls freely until its edge.
+  function isScrollingInsideTallStep(direction) {
+    const positions = snapPositions();
+    const index = currentStepIndex(positions);
+    const screenHeight = window.innerHeight - navHeight;
+    const stepEnd = positions[index + 1] ?? positions[index];
+    const isTall = stepEnd - positions[index] > screenHeight + TALL_STEP_TOLERANCE_PX;
+    if (!isTall) return false;
+    return direction > 0 ? window.scrollY < stepEnd - screenHeight - 2 : window.scrollY > positions[index] + 2;
+  }
+
+  window.addEventListener("wheel", (event) => {
+    const isVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX);
+    if (event.ctrlKey || !isVertical) return; // pinch-zoom and sideways scrolling stay native
+    const direction = Math.sign(event.deltaY);
+    const now = performance.now();
+    const continuesGesture = now - lastWheelTime < WHEEL_GESTURE_PAUSE_MS;
+    lastWheelTime = now;
+    if (!isMovingToStep && isScrollingInsideTallStep(direction)) return;
+    event.preventDefault();
+    if (!isMovingToStep && !continuesGesture) moveOneStep(direction);
+  }, { passive: false });
+
+  // Navigation links go to the chapter's first snap point. Left to the browser,
+  // the jump to the section top and the mandatory snapping can disagree and
+  // land part-way into the first step.
+  document.querySelectorAll('.nav a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const chapter = document.querySelector(link.hash);
+      if (!chapter) return;
+      event.preventDefault();
+      const chapterStart = pageTop(chapter) - navHeight;
+      const target = snapPositions().find((position) => position >= chapterStart - 2) ?? chapterStart;
+      window.scrollTo({ top: target, behavior: prefersReducedMotion.matches ? "auto" : "smooth" });
+      history.replaceState(null, "", link.hash);
+    });
+  });
+
+  // Mark the chapter currently on screen in the navigation bar.
+  const navLinks = new Map(
+    [...document.querySelectorAll('.nav a[href^="#"]')].map((link) => [link.hash.slice(1), link])
+  );
+  const chapterObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      navLinks.get(entry.target.id)?.classList.toggle("is-current", entry.isIntersecting);
+    }
+  }, { rootMargin: "-45% 0px -45% 0px" });
+  document.querySelectorAll(".chapter").forEach((chapter) => chapterObserver.observe(chapter));
 </script>
 </body>
 </html>
