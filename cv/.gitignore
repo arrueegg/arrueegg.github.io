@@ -1,0 +1,9 @@
+# LaTeX build output; only cv.tex is tracked
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+# The built PDF is published as assets/CV_Arno.pdf
+cv.pdf
